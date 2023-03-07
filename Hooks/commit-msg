@@ -1,0 +1,13 @@
+#!/bin/bash
+
+valid_commit_msg_regex="^#[0-9]+:[a-zA-Z0-9\-_ ]{20,150}$"
+
+message="This commit violates the commit message rules. Please rename your commit."
+
+if [[ ! $(cat $1) =~ $valid_commit_msg_regex ]]
+then
+    echo "$message"
+    exit 1
+fi
+
+exit 0
