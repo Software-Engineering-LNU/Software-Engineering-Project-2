@@ -290,10 +290,6 @@
                     .HasColumnType("character varying")
                     .HasColumnName("phone_number");
             });
-
-            this.OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
