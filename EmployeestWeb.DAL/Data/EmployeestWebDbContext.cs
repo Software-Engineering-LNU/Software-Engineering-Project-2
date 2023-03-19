@@ -24,17 +24,17 @@
         public virtual DbSet<Position> Positions { get; set; } = null!;
 
         public virtual DbSet<PositionPermission> PositionPermissions { get; set; } = null!;
-        
+
         public virtual DbSet<Project> Projects { get; set; } = null!;
-        
+
         public virtual DbSet<ProjectMember> ProjectMembers { get; set; } = null!;
-        
+
         public virtual DbSet<Models.Task> Tasks { get; set; } = null!;
-        
+
         public virtual DbSet<Team> Teams { get; set; } = null!;
-        
+
         public virtual DbSet<TeamMember> TeamMembers { get; set; } = null!;
-        
+
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

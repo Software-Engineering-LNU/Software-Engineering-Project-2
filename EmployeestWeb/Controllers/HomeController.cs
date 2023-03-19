@@ -1,15 +1,16 @@
 ﻿namespace EmployeestWeb.Controllers
 {
-    using EmployeestWeb.Models;
     using System.Diagnostics;
+    using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : Controller
     {
         private readonly ILogger _logger;
+
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
+            this._logger = logger;
         }
 
         public IActionResult Index()
