@@ -1,9 +1,9 @@
-﻿using EmployeestWeb.DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using Task = EmployeestWeb.DAL.Models.Task;
-
-namespace EmployeestWeb.DAL.Data
+﻿namespace EmployeestWeb.DAL.Data
 {
+    using EmployeestWeb.DAL.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Task = EmployeestWeb.DAL.Models.Task;
+
     public partial class EmployeestWebDbContext : DbContext
     {
         public EmployeestWebDbContext()
@@ -16,15 +16,25 @@ namespace EmployeestWeb.DAL.Data
         }
 
         public virtual DbSet<Event> Events { get; set; } = null!;
+
         public virtual DbSet<EventMember> EventMembers { get; set; } = null!;
+
         public virtual DbSet<Permission> Permissions { get; set; } = null!;
+
         public virtual DbSet<Position> Positions { get; set; } = null!;
+
         public virtual DbSet<PositionPermission> PositionPermissions { get; set; } = null!;
+        
         public virtual DbSet<Project> Projects { get; set; } = null!;
+        
         public virtual DbSet<ProjectMember> ProjectMembers { get; set; } = null!;
+        
         public virtual DbSet<Models.Task> Tasks { get; set; } = null!;
+        
         public virtual DbSet<Team> Teams { get; set; } = null!;
+        
         public virtual DbSet<TeamMember> TeamMembers { get; set; } = null!;
+        
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -289,9 +299,9 @@ namespace EmployeestWeb.DAL.Data
                     .HasColumnName("phone_number");
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            this.OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder) { }
     }
 }

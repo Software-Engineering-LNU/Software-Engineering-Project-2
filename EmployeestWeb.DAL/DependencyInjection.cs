@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
-
-namespace EmployeestWeb.DAL
+﻿namespace EmployeestWeb.DAL
 {
+    using System.Runtime.CompilerServices;
+    using Microsoft.Extensions.DependencyInjection;
+
     public static class DependencyInjection
     {
         public static void AddDAL(this IServiceCollection services)
