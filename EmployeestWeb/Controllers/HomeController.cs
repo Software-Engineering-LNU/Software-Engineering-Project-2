@@ -25,7 +25,7 @@
 
         public ILogger GetLogger()
         {
-            return logger;
+            return this.logger;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

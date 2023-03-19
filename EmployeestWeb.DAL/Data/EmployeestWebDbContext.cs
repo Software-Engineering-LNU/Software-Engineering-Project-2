@@ -7,7 +7,7 @@
     public partial class EmployeestWebDbContext : DbContext
     {
         private readonly string connection = "Host=localhost;Port=5432;Database=EmployeestWebDb;Username=postgres;Password=1234567890";
-        
+
         public EmployeestWebDbContext()
         {
         }
