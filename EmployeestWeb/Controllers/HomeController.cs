@@ -6,11 +6,11 @@
 
     public class HomeController : Controller
     {
-        private readonly ILogger _logger;
+        private readonly ILogger logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
-            this._logger = logger;
+            this.logger = logger;
         }
 
         public IActionResult Index()
@@ -21,6 +21,11 @@
         public IActionResult Privacy()
         {
             return this.View();
+        }
+
+        public ILogger GetLogger()
+        {
+            return logger;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
