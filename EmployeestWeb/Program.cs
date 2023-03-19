@@ -2,11 +2,14 @@ namespace EmployeestWeb
 {
     using EmployeestWeb.BLL;
     using EmployeestWeb.DAL;
+    using EmployeestWeb.DAL.Data;
+    using Microsoft.EntityFrameworkCore;
 
     public class Program
     {
         protected Program()
-        { }
+        {
+        }
 
         public static void Main(string[] args)
         {
@@ -17,6 +20,15 @@ namespace EmployeestWeb
             builder.Services.AddDAL();
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("EmployeestDbConnString"), npgsqlOptions =>
+                {
+                    npgsqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorCodesToAdd: new List<string> { "4060" });
+                }));
 
             var app = builder.Build();
 

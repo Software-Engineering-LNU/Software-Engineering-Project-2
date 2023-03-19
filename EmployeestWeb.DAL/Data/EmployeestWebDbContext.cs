@@ -2,12 +2,11 @@
 {
     using EmployeestWeb.DAL.Models;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using Task = EmployeestWeb.DAL.Models.Task;
 
     public partial class EmployeestWebDbContext : DbContext
     {
-        private readonly string connection = "Host=localhost;Port=5432;Database=EmployeestWebDb;Username=postgres;Password=1234567890";
-
         public EmployeestWebDbContext()
         {
         }
@@ -38,14 +37,6 @@
         public virtual DbSet<TeamMember> TeamMembers { get; set; } = null!;
 
         public virtual DbSet<User> Users { get; set; } = null!;
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(this.connection);
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
