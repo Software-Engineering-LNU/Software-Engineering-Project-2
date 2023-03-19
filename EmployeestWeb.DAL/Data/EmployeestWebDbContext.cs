@@ -1,5 +1,6 @@
 ﻿using EmployeestWeb.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using Task = EmployeestWeb.DAL.Models.Task;
 
 namespace EmployeestWeb.DAL.Data
 {
