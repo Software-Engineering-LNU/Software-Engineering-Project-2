@@ -2,11 +2,12 @@
 {
     using EmployeestWeb.DAL.Models;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
     using Task = EmployeestWeb.DAL.Models.Task;
 
     public partial class EmployeestWebDbContext : DbContext
     {
+        private readonly string connection = "Host=localhost;Port=5432;Database=EmployeestWebDb;Username=postgres;Password=1234567890";
+        
         public EmployeestWebDbContext()
         {
         }
@@ -15,14 +16,6 @@
             : base(options)
         {
         }
-
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-        IConfigurationRoot configuration = builder.Build();
-
-        string connectionString = configuration.GetConnectionString("DefaultConnection");
 
         public virtual DbSet<Event> Events { get; set; } = null!;
 
@@ -50,7 +43,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(connectionString);
+                optionsBuilder.UseNpgsql(this.connection);
             }
         }
 
