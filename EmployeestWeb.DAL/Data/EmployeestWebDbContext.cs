@@ -302,6 +302,6 @@
             this.OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder) { }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
