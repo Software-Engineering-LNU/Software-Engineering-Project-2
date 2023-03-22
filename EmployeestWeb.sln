@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeestWeb", "EmployeestWeb\EmployeestWeb.csproj", "{B74DC72E-7FBA-4EAD-B9F6-3886D228C8CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeestWeb", "EmployeestWeb\EmployeestWeb.csproj", "{B74DC72E-7FBA-4EAD-B9F6-3886D228C8CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeestWeb.DAL", "EmployeestWeb.DAL\EmployeestWeb.DAL.csproj", "{C40E1DD6-3509-450B-A2E2-D72E8BD4DB0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeestWeb.DAL", "EmployeestWeb.DAL\EmployeestWeb.DAL.csproj", "{C40E1DD6-3509-450B-A2E2-D72E8BD4DB0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeestWeb.BLL", "EmployeestWeb.BLL\EmployeestWeb.BLL.csproj", "{65936E6E-66F7-4E03-A191-EAB05D832CFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeestWeb.BLL", "EmployeestWeb.BLL\EmployeestWeb.BLL.csproj", "{65936E6E-66F7-4E03-A191-EAB05D832CFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1676FABF-1C80-4894-BED0-1887F29E1DA9}"
+	ProjectSection(SolutionItems) = preProject
+		StyleCopRuleSet.ruleset = StyleCopRuleSet.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
