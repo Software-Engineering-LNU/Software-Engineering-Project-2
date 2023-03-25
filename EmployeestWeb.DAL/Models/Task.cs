@@ -11,8 +11,6 @@
 
         public string Description { get; set; } = null!;
 
-        public int Estimation { get; set; }
-
         public string Status { get; set; } = null!;
 
         public int StoryPoints { get; set; }

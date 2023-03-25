@@ -16,18 +16,6 @@
         {
         }
 
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-        IConfigurationRoot configuration = builder.Build();
-
-        string connectionString = configuration.GetConnectionString("DefaultConnection");
-
-        public virtual DbSet<Event> Events { get; set; } = null!;
-
-        public virtual DbSet<EventMember> EventMembers { get; set; } = null!;
-
         public virtual DbSet<Permission> Permissions { get; set; } = null!;
 
         public virtual DbSet<Position> Positions { get; set; } = null!;
@@ -46,56 +34,9 @@
 
         public virtual DbSet<User> Users { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(connectionString);
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Event>(entity =>
-            {
-                entity.ToTable("events");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Date).HasColumnName("date");
-
-                entity.Property(e => e.EndTime).HasColumnName("end_time");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .HasColumnName("name");
-
-                entity.Property(e => e.StartTime).HasColumnName("start_time");
-            });
-
-            modelBuilder.Entity<EventMember>(entity =>
-            {
-                entity.ToTable("event_members");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.EventId).HasColumnName("event_id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.EventMembers)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("event_members_reference_events_fk");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.EventMembers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("event_members_reference_users_fk");
-            });
-
             modelBuilder.Entity<Permission>(entity =>
             {
                 entity.ToTable("permissions");
@@ -205,8 +146,6 @@
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
-                entity.Property(e => e.Estimation).HasColumnName("estimation");
-
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .HasColumnName("name");
@@ -306,10 +245,6 @@
                     .HasColumnType("character varying")
                     .HasColumnName("phone_number");
             });
-
-            this.OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

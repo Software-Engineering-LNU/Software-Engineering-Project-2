@@ -1,11 +1,22 @@
 using EmployeestWeb.BLL;
 using EmployeestWeb.DAL;
+using EmployeestWeb.DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddBLL();
 builder.Services.AddDAL();
+
+builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("EmployeestDbConnString"), npgsqlOptions =>
+                {
+                    npgsqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorCodesToAdd: new List<string> { "4060" });
+                }));
 
 builder.Services.AddControllersWithViews();
 
