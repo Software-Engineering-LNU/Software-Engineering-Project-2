@@ -34,7 +34,6 @@
 
         public virtual DbSet<User> Users { get; set; } = null!;
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Permission>(entity =>
