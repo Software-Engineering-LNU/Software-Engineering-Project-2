@@ -30,7 +30,6 @@ namespace EmployeestWeb
 
             builder.Services.AddControllersWithViews();
 
-
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
@@ -62,7 +61,7 @@ namespace EmployeestWeb
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Authorization}/{action=SignIn}/{id?}");
 
             app.Run();
         }
