@@ -3,6 +3,73 @@
     ViewData["Title"] = "SignUp"; 
     Layout = "~/Views/Shared/_AuthorizationLayout.cshtml";
 }
+<style>
+    .section {
+        color: #5A5A5A;
+        font-family: Arial;
+        margin: 0 40%;
+        font-size: 14px;
+    }
 
-<h1>SignUp</h1>
+    .title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    label {
+        margin: 10px 0 0;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .navigationItem {
+        margin: 5px 0 20px;
+    }
+
+    .navigationItem a {
+        color: #5A5A5A;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    button {
+        background-color: #5A5A5A;
+        color: #FFFFFF;
+        width: 100%;
+        padding: 5px 0;
+    }
+
+</style>
+
+<div class="section">
+    <h1 class="title">Sign up</h1>
+    <section>
+        <label>Full name:</label>
+        <input/>
+    </section>
+    <section>
+        <label>Phone number:</label>
+        <input/>
+    </section>
+    <section>
+        <label>Email:</label>
+        <input type="email" />
+    </section>
+    <section>
+        <label>Password:</label>
+        <input type="password" />
+    </section>
+    <section>
+        <label>Confirm password:</label>
+        <input type="password" />
+    </section>
+    <nav class="navigationItem">
+        <span>Already have an account?</span>
+        <a asp-area="" asp-controller="Authorization" asp-action="SignIn">Sign in</a>
+    </nav>
+    <button>Sign Up</button>
+
+</div>
 
