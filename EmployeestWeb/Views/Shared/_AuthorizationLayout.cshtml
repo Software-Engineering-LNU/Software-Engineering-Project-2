@@ -2,12 +2,115 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EmployeestWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EmployeestWeb.styles.css" asp-append-version="true" />
 </head>
+<style>
+    body {
+        font-family: Arial;
+    }
+    main {
+        color: #5A5A5A;
+    }
+    a {
+        font-family: Arial;
+        text-decoration: none;    
+    }
+    header {
+        color: #5A5A5A;
+        margin: 0px 0px 16px;
+        padding: 15px 15px;
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+        border-bottom: 1px solid #E5E5E5;
+    }
+    footer {
+        background-color: #5A5A5A;
+        color: #FFFFFF;
+        margin: 16px 0px 0px;
+        padding: 15px 15px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -0.25rem 0.75rem rgba(0, 0, 0, .1);
+        border-top: 1px solid #2D2D2D;
+        text-align: center;
+    }
+    .logoLight {
+        font-size: 24px;
+        color: #FFFFFF;
+    }
+    .logoLight:hover {
+        color: #FFFFFF;
+    }
+    .logoDark {
+        font-size: 24px;
+        color: #5A5A5A;
+    }
+    .logoDark:hover {
+        font-size: 24px;
+        color: #5A5A5A;
+    }
+    .navigationBar {
+        float: right;
+        padding: 5px 5px;
+    }
+    .navigationItemDark {
+        background-color: #5A5A5A;
+        color: #FFFFFF;
+        border: 1px solid #5A5A5A;
+        padding:10px 30px;
+        font-size: 14px;
+    }
+    .navigationItemDark:hover {
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+    .navigationItemLight {
+        color: #5A5A5A;
+        border: 1px solid #5A5A5A;
+        padding: 10px 30px;
+        font-size: 14px;
+        margin: 20px 20px;
+    }
+    .navigationItemLight:hover {
+        color: #5A5A5A;
+        text-decoration: underline;
+    }
+    .secondaryText {
+        font-size: 14px;
+        font-weight:200;
+        margin: 20px 0px;
+    }
+    
+</style>
 <body>
+    <header>
+        <nav>
+            <a class="logoDark" asp-area="" asp-controller="Home" asp-action="Index">EM | Employeest</a>
+            <div class="navigationBar">
+                <a class="navigationItemLight" asp-area="" asp-controller="Authorization" asp-action="SignUp">Sign up</a>
+                <a class="navigationItemDark" asp-area="" asp-controller="Authorization" asp-action="SignIn">Sign in</a>
+            </div>
+        </nav>
+    </header>
     <div>
         @RenderBody()
     </div>
+    <footer>
+        <div>
+            <nav>
+                <a class="logoLight" asp-area="" asp-controller="Home" asp-action="Index">EM | Employeest</a>
+            </nav>
+            <p class="secondaryText">2023 © All rights reserved</p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
