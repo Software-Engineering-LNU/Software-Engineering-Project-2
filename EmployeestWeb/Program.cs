@@ -61,7 +61,7 @@ namespace EmployeestWeb
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Authorization}/{action=SignIn}/{id?}");
+                pattern: "{controller=Home}/{action=Home}/{id?}");
 
             app.Run();
         }

@@ -13,12 +13,12 @@
     body {
         font-family: Arial;
     }
-    main {
-        color: #5A5A5A;
-    }
     a {
         font-family: Arial;
         text-decoration: none;    
+    }
+    main {
+        margin: 0 0 200px;
     }
     header {
         color: #5A5A5A;
@@ -90,20 +90,20 @@
 <body>
     <header>
         <nav>
-            <a class="logoDark" asp-area="" asp-controller="Home" asp-action="Index">EM | Employeest</a>
+            <a class="logoDark" asp-area="" asp-controller="Home" asp-action="Home">EM | Employeest</a>
             <div class="navigationBar">
                 <a class="navigationItemLight" asp-area="" asp-controller="Authorization" asp-action="SignUp">Sign up</a>
                 <a class="navigationItemDark" asp-area="" asp-controller="Authorization" asp-action="SignIn">Sign in</a>
             </div>
         </nav>
     </header>
-    <div>
+    <main>
         @RenderBody()
-    </div>
+    </main>
     <footer>
         <div>
             <nav>
-                <a class="logoLight" asp-area="" asp-controller="Home" asp-action="Index">EM | Employeest</a>
+                <a class="logoLight" asp-area="" asp-controller="Home" asp-action="Home">EM | Employeest</a>
             </nav>
             <p class="secondaryText">2023 © All rights reserved</p>
         </div>
