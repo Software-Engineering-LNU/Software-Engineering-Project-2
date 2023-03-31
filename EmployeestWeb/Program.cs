@@ -30,9 +30,6 @@ namespace EmployeestWeb
 
             builder.Services.AddControllersWithViews();
 
-
-            builder.Services.AddControllersWithViews();
-
             builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("EmployeestDbConnString"), npgsqlOptions =>
                 {
