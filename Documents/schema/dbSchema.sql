@@ -92,7 +92,6 @@ create table tasks
     description  text        not null,
     estimation   int         not null,
     status       varchar     not null,
-    story_points int         not null,
     team_id      bigint      not null,
     user_id      bigint      not null,
 
