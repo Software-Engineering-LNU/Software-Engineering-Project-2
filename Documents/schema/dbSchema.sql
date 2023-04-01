@@ -54,7 +54,7 @@ create table positions
 
 create table permissions
 (
-    id   bigserial       not null,
+    id   bigserial    not null,
     name varchar(150) not null,
 
     constraint permissions_pk primary key (id)
@@ -83,28 +83,6 @@ create table project_members
     constraint project_members_reference_projects_fk foreign key (project_id) references projects (id),
     constraint project_members_reference_users_fk foreign key (user_id) references users (id),
     constraint project_members_reference_positions_fk foreign key (position_id) references positions (id)
-);
-
-create table events
-(
-    id         bigserial              not null,
-    name       varchar(50)            not null,
-    date       date                   not null,
-    start_time time without time zone not null,
-    end_time   time without time zone not null,
-
-    constraint events_pk primary key (id)
-);
-
-create table event_members
-(
-    id       bigserial not null,
-    event_id bigint    not null,
-    user_id  bigint    not null,
-
-    constraint event_members_pk primary key (id),
-    constraint event_members_reference_events_fk foreign key (event_id) references events (id),
-    constraint event_members_reference_users_fk foreign key (user_id) references users (id)
 );
 
 create table tasks
