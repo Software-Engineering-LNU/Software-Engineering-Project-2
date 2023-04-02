@@ -46,3 +46,105 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.sidebar {
+  background-color: #D9D9D9;
+  position: absolute;
+  width: 120px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-logo {
+  width: 45px;
+  margin-top: 60px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini-logo-icon img{
+  width: 45px;
+  height: 45px;
+}
+
+.nothing-box {
+  width: 64px;
+  height: 64px;
+}
+
+.aside-navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+}
+
+.nav-button-icon {
+  width: 38px;
+}
+
+.aside-navbar-wrapper {
+  background-color: #B5B5B5;
+  padding: 50px 8px;
+}
+
+.user-block {
+  position: absolute;
+  right: 52px;
+  top: 60px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  z-index: 1;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.user-avatar-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: none;
+}
+
+.options-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.user-name {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.user-position {
+  font-size: 14px;
+  font-weight: 200;
+}

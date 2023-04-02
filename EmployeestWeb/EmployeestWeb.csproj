@@ -25,4 +25,8 @@
     <ProjectReference Include="..\EmployeestWeb.BLL\EmployeestWeb.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\mini-logo.svg" />
+  </ItemGroup>
+
 </Project>
