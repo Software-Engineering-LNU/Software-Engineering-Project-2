@@ -29,4 +29,8 @@
     <None Include="wwwroot\assets\mini-logo.svg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Owner\Dashboard.cshtml" />
+  </ItemGroup>
+
 </Project>
