@@ -90,7 +90,7 @@ create table tasks
     id           bigserial   not null,
     name         varchar(50) not null,
     description  text        not null,
-    estimation   int         not null,
+    story_points   int         not null,
     status       varchar     not null,
     team_id      bigint      not null,
     user_id      bigint      not null,
