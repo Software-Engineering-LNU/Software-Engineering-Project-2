@@ -9,9 +9,11 @@
     public class AuthorizationController : Controller
     {
         private readonly IUserService userService;
+        private readonly ILogger logger;
 
-        public AuthorizationController(IUserService userService)
+        public AuthorizationController(ILogger<HomeController> logger, IUserService userService)
         {
+            this.logger = logger;
             this.userService = userService;
         }
 
@@ -26,8 +28,15 @@
         {
             if (this.ModelState.IsValid)
             {
-                long? id = this.userService.GetUserId(email, password);
-                return this.RedirectToAction("Home", "Home");
+                long? id = this.userService.AuthorizeUser(email, password);
+                if (id != null)
+                {
+                    return this.RedirectToAction("Home", "Home");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("InvalidSignIn", "Invalid login or password!");
+                }
             }
 
             return this.View();
@@ -44,8 +53,15 @@
         {
             if (user.Password.Equals(password) && this.ModelState.IsValid)
             {
-                this.userService.AddUser(user);
-                return this.RedirectToAction("Home", "Home");
+                long? id = this.userService.RegisterUser(user);
+                if (id != null)
+                {
+                    return this.RedirectToAction("Home", "Home");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("InvalidSignUp", "This user already exist!");
+                }
             }
 
             return this.View();

@@ -4,9 +4,9 @@ using EmployeestWeb.DAL.Models;
 
 public interface IUserService
 {
-    void AddUser(User user);
+    long? RegisterUser(User user);
 
     User? GetUser(long id);
 
-    long? GetUserId(string email, string password);
+    long? AuthorizeUser(string email, string password);
 }

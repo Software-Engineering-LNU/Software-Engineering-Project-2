@@ -25,8 +25,8 @@ public class UserRepository : IUserRepository
         return this.context.Users?.Single(x => x.Id == id);
     }
 
-    public long? GetUserId(string email, string password)
+    public User? GetUser(string email)
     {
-        return this.context.Users?.Single(x => x.Email == email && x.Password.Equals(password)).Id;
+        return this.context.Users?.Single(x => x.Email == email);
     }
 }

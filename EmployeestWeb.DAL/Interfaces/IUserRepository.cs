@@ -7,5 +7,5 @@ public interface IUserRepository
 
     User? GetUser(long id);
 
-    long? GetUserId(string email, string password);
+    User? GetUser(string email);
 }

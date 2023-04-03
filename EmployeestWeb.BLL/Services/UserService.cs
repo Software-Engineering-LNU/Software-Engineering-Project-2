@@ -4,7 +4,6 @@ using Interfaces;
 using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
-using System.Collections.Generic;
 
 public class UserService : IUserService
 {
@@ -15,25 +14,40 @@ public class UserService : IUserService
         this.userRepository = userRepository;
     }
 
-    public void AddUser(User user)
+    public long? RegisterUser(User user)
     {
-        if (user == null)
+        try
         {
-            var errorMessage = $"User cannot be null.";
-            throw new ArgumentNullException(nameof(user), errorMessage);
+            this.userRepository.GetUser(user.Email);
+            return null;
         }
+        catch (InvalidOperationException)
+        {
+            this.userRepository.AddUser(user);
+            return user.Id;
+        }
+    }
 
-        this.userRepository.AddUser(user);
+    public long? AuthorizeUser(string email, string password)
+    {
+        try
+        {
+            User? user = this.userRepository.GetUser(email);
+            if (user != null && user.Password.Equals(password))
+            {
+                return user.Id;
+            }
+
+            return null;
+        }
+        catch (InvalidOperationException)
+        {
+            return null;
+        }
     }
 
     public User? GetUser(long id)
     {
-        var user = this.userRepository.GetUser(id);
-        return user;
-    }
-
-    public long? GetUserId(string email, string password)
-    {
-        return this.userRepository.GetUserId(email, password);
+        return this.userRepository.GetUser(id);
     }
 }
