@@ -30,17 +30,6 @@ namespace EmployeestWeb
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddControllersWithViews();
-
-            builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("EmployeestDbConnString"), npgsqlOptions =>
-                {
-                    npgsqlOptions.EnableRetryOnFailure(
-                        maxRetryCount: 3,
-                        maxRetryDelay: TimeSpan.FromSeconds(5),
-                        errorCodesToAdd: new List<string> { "4060" });
-                }));
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

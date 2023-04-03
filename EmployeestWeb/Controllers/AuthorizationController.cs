@@ -1,20 +1,35 @@
 ﻿namespace EmployeestWeb.Controllers
 {
     using System.Diagnostics;
+    using EmployeestWeb.BLL.Interfaces;
+    using EmployeestWeb.DAL.Models;
     using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
 
     public class AuthorizationController : Controller
     {
-        private readonly ILogger logger;
+        private readonly IUserService userService;
 
-        public AuthorizationController(ILogger<HomeController> logger)
+        public AuthorizationController(IUserService userService)
         {
-            this.logger = logger;
+            this.userService = userService;
         }
 
         public IActionResult SignIn()
         {
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SignIn(string email, string password)
+        {
+            if (this.ModelState.IsValid)
+            {
+                long? id = this.userService.GetUserId(email, password);
+                return this.RedirectToAction("Home", "Home");
+            }
+
             return this.View();
         }
 
@@ -23,9 +38,17 @@
             return this.View();
         }
 
-        public ILogger GetLogger()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SignUp(User user, string password)
         {
-            return this.logger;
+            if (user.Password.Equals(password) && this.ModelState.IsValid)
+            {
+                this.userService.AddUser(user);
+                return this.RedirectToAction("Home", "Home");
+            }
+
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,4 +1,4 @@
-﻿
+﻿@model EmployeestWeb.DAL.Models.User
 @{
     ViewData["Title"] = "SignUp"; 
     Layout = "~/Views/Shared/_AuthorizationLayout.cshtml";
@@ -34,7 +34,7 @@
         text-decoration: underline;
     }
 
-    button {
+    .button {
         background-color: #5A5A5A;
         color: #FFFFFF;
         width: 100%;
@@ -43,23 +43,23 @@
 
 </style>
 
-<div class="section">
+<form class="section" asp-action="SignUp">
     <h1 class="title">Sign up</h1>
     <section>
-        <label>Full name:</label>
-        <input/>
+        <label asp-for="FullName">Full name:</label>
+        <input asp-for="FullName" />
     </section>
     <section>
-        <label>Phone number:</label>
-        <input/>
+        <label asp-for="PhoneNumber">Phone number:</label>
+        <input asp-for="PhoneNumber" />
     </section>
     <section>
-        <label>Email:</label>
-        <input type="email" />
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" type="email" />
     </section>
     <section>
-        <label>Password:</label>
-        <input type="password" />
+        <label asp-for="Password">Password:</label>
+        <input asp-for="Password" type="password" />
     </section>
     <section>
         <label>Confirm password:</label>
@@ -69,7 +69,7 @@
         <span>Already have an account?</span>
         <a asp-area="" asp-controller="Authorization" asp-action="SignIn">Sign in</a>
     </nav>
-    <button>Sign Up</button>
+    <input class="button" type="submit" value="Sign up" />
 
-</div>
+</form>
 
