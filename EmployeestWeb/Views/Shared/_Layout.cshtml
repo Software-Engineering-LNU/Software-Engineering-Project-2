@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="addEmployeePopup" asp-area="" class="nav-link text-dark">Open Add Employee popup(Test)</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -45,5 +48,36 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <div id="popupForm" style="visibility: hidden">
+        <partial name="~/Views/Worker/AddEmployee.cshtml" />
+    </div>
 </body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#addEmployeePopup').click(function () {
+            event.preventDefault();
+
+            // Create the dialog object
+            var dialog = $('#popupForm').dialog({
+                autoOpen: false,
+                modal: true,
+                title: 'Popup Form',
+                width: 400,
+                height: 300
+            });
+            $(dialog).css('visibility', 'visible');
+            // Open the dialog
+            dialog.dialog('open');
+            $(dialog).css('visibility', 'visible');
+
+        });
+    });
+</script>
 </html>

@@ -18,6 +18,7 @@ namespace EmployeestWeb
             // Add services to the container.
             builder.Services.AddBLL();
             builder.Services.AddDAL();
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
             builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("EmployeestDbConnString"), npgsqlOptions =>

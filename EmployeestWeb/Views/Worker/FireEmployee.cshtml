@@ -1,0 +1,8 @@
+﻿@model FireEmployeeModel
+
+@using (Html.BeginForm("FireEmployee", "Worker", FormMethod.Post))
+{
+    @Html.DropDownList("PropertyName", new SelectList(typeof(FireEmployeeModel).GetProperties().Select(p => p.Name)))
+    @Html.TextBox("PropertyValue")
+    <button type="submit">Search</button>
+}
