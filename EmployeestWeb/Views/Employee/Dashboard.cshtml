@@ -100,87 +100,30 @@
                     </button>
                 </div>
             </div>
+            
+            @{ 
+                var tasks = new List<string> { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5" };
+            }
             <div class="task-list">
-                <div class="task">
-                    <div class="task-name-wrapper">
-                        <div class="task-indicator"></div>
-                        <div class="task-name">Task</div>
+                @foreach (var task in tasks)
+                {
+                    <div class="task">
+                        <div class="task-name-wrapper">
+                            <div class="task-indicator"></div>
+                            <div class="task-name">@task</div>
+                        </div>
+                        <div class="functionality-wrapper">
+                            <button class="start-task-button">
+                                Start task
+                            </button>
+                            <button class="options-button">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="functionality-wrapper">
-                        <button class="start-task-button">
-                            Start task
-                        </button>
-                        <button class="options-button">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="task">
-                    <div class="task-name-wrapper">
-                        <div class="task-indicator"></div>
-                        <div class="task-name">Task</div>
-                    </div>
-                    <div class="functionality-wrapper">
-                        <button class="start-task-button">
-                            Start task
-                        </button>
-                        <button class="options-button">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="task">
-                    <div class="task-name-wrapper">
-                        <div class="task-indicator"></div>
-                        <div class="task-name">Task</div>
-                    </div>
-                    <div class="functionality-wrapper">
-                        <button class="start-task-button">
-                            Start task
-                        </button>
-                        <button class="options-button">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="task">
-                    <div class="task-name-wrapper">
-                        <div class="task-indicator"></div>
-                        <div class="task-name">Task</div>
-                    </div>
-                    <div class="functionality-wrapper">
-                        <button class="start-task-button">
-                            Start task
-                        </button>
-                        <button class="options-button">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="task">
-                    <div class="task-name-wrapper">
-                        <div class="task-indicator"></div>
-                        <div class="task-name">Task</div>
-                    </div>
-                    <div class="functionality-wrapper">
-                        <button class="start-task-button">
-                            Start task
-                        </button>
-                        <button class="options-button">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </button>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </aside>
