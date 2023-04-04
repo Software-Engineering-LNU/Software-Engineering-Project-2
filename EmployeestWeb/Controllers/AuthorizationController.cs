@@ -9,11 +9,9 @@
     public class AuthorizationController : Controller
     {
         private readonly IUserService userService;
-        private readonly ILogger logger;
 
-        public AuthorizationController(ILogger<HomeController> logger, IUserService userService)
+        public AuthorizationController(IUserService userService)
         {
-            this.logger = logger;
             this.userService = userService;
         }
 

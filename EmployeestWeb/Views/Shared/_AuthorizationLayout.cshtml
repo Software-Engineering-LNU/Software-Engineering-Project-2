@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,10 @@
 </head>
 <style>
     body {
-        font-family: Arial;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     a {
-        font-family: Arial;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         text-decoration: none;    
     }
     main {
@@ -89,7 +89,7 @@
 </style>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Related links">
             <a class="logoDark" asp-area="" asp-controller="Home" asp-action="Home">EM | Employeest</a>
             <div class="navigationBar">
                 <a class="navigationItemLight" asp-area="" asp-controller="Authorization" asp-action="SignUp">Sign up</a>
@@ -102,7 +102,7 @@
     </main>
     <footer>
         <div>
-            <nav>
+            <nav aria-label="Logo link">
                 <a class="logoLight" asp-area="" asp-controller="Home" asp-action="Home">EM | Employeest</a>
             </nav>
             <p class="secondaryText">2023 © All rights reserved</p>
