@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.DAL;
+namespace EmployeestWeb.DAL;
 
 using Interfaces;
 using Repositories;

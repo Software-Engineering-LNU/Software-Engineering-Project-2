@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.DAL.Data
+namespace EmployeestWeb.DAL.Data
 {
     using EmployeestWeb.DAL.Models;
     using Microsoft.EntityFrameworkCore;
