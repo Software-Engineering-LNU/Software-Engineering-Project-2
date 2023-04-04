@@ -3,41 +3,60 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EmployeestWeb</title>
+    <title>@ViewData["Title"] - Employeest</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EmployeestWeb.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">EmployeestWeb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Home">Home</a>
-                        </li>
-                    </ul>
+    <aside>
+        <div class="sidebar">
+            <button class="mini-logo">
+                <img
+                    class="mini-logo-icon"
+                    src="~/assets/mini-logo.svg" 
+                    alt="Mini Employeest logo"
+                >
+            </button>
+            <nav class="aside-navbar-wrapper">
+                <div class="aside-navbar">
+                    <button class="nav-button">
+                        <img class="nav-button-icon"
+                             src="~/assets/home-icon.svg" 
+                             alt="Home icon"
+                        >
+                    </button>
+                    <button class="nav-button">
+                        <img class="nav-button-icon" 
+                             src="~/assets/team-icon.svg" 
+                             alt="Team icon"
+                        >
+                    </button>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+            <div class="nothing-box"></div>
+        </div>
+    </aside>
+    <div class="user-block">
+                    <button class="options-button">
+                        <img src="~/assets/settings-icon.svg" alt="Settings icon">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-content">
+                            <div class="user-name">User Name</div>
+                            <div class="user-position">Employee</div>
+                        </div>
+                        <button class="user-avatar-button">
+                            <img src="~/assets/team-member-avatar.svg" alt="User avatar">
+                            <img src="~/assets/bottom-arrow-filled.svg" alt="Bottom filled arrow">
+                        </button>
+                    </div>
+                </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - EmployeestWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
