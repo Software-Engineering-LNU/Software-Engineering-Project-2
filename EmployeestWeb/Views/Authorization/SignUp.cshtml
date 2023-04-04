@@ -1,0 +1,75 @@
+﻿@model EmployeestWeb.DAL.Models.User
+@{
+    ViewData["Title"] = "SignUp"; 
+    Layout = "~/Views/Shared/_AuthorizationLayout.cshtml";
+}
+<style>
+    .section {
+        color: #5A5A5A;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 0 40%;
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    label {
+        margin: 10px 0 0;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .navigationItem {
+        margin: 5px 0 20px;
+    }
+
+    .navigationItem a {
+        color: #5A5A5A;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .button {
+        background-color: #5A5A5A;
+        color: #FFFFFF;
+        width: 100%;
+        padding: 5px 0;
+    }
+
+</style>
+
+<form class="section" asp-action="SignUp">
+    <h1 class="title">Sign up</h1>
+    <section>
+        <label asp-for="FullName">Full name:</label>
+        <input asp-for="FullName" />
+    </section>
+    <section>
+        <label asp-for="PhoneNumber">Phone number:</label>
+        <input asp-for="PhoneNumber" />
+    </section>
+    <section>
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" type="email" />
+    </section>
+    <section>
+        <label asp-for="Password">Password:</label>
+        <input asp-for="Password" type="password" />
+    </section>
+    <section>
+        <label>Confirm password:</label>
+        <input type="password" />
+    </section>
+    <nav class="navigationItem">
+        <span>Already have an account?</span>
+        <a asp-area="" asp-controller="Authorization" asp-action="SignIn">Sign in</a>
+    </nav>
+    <input class="button" type="submit" value="Sign up" />
+
+</form>
+
