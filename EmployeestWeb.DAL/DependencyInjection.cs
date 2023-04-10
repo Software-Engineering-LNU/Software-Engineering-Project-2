@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.DAL;
+namespace EmployeestWeb.DAL;
 
 using Interfaces;
 using Repositories;
@@ -11,5 +11,6 @@ public static class DependencyInjection
         // Register services
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<ITaskRepository, TaskRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
     }
 }

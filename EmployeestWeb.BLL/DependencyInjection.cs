@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.BLL;
+namespace EmployeestWeb.BLL;
 
 using Interfaces;
 using Services;
@@ -10,6 +10,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<ITaskService, TaskService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddHttpContextAccessor();
     }
 }
