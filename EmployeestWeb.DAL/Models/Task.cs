@@ -19,8 +19,8 @@
 
         public long UserId { get; set; }
 
-        public virtual Team Team { get; set; } = null!;
+        public virtual Team? Team { get; set; } = null!;
 
-        public virtual User User { get; set; } = null!;
+        public virtual User? User { get; set; } = null!;
     }
 }

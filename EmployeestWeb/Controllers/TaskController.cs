@@ -46,6 +46,8 @@ public class TaskController : Controller
             return this.RedirectToAction(nameof(this.Index));
         }
 
+        var allErrors = this.ModelState.Values.SelectMany(x => x.Errors);
+
         return this.View(task);
     }
 
