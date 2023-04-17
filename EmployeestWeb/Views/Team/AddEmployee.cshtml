@@ -1,0 +1,16 @@
+﻿@model AddEmployeeTeamModel
+
+<link href="@Url.Content("~/wwwroot/css/site.css")" rel="stylesheet" type="text/css" />
+<div class="add-employee-form">
+<form asp-action="AddEmployee" asp-controller="Team" method="post">
+    @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+    <div class="form-group">
+        <label asp-for="Email" class="add-employee-label"></label>
+        <input asp-for="Email" class="add-employee-input" />
+        <span asp-validation-for="Email" class="add-employee-validation-error"></span>
+    </div>
+
+    <button type="submit" class="add-employee-btn">Add Employee</button>
+</form>
+    </div>
