@@ -1,12 +1,14 @@
-﻿namespace EmployeestWeb.BLL
-{
-    using Microsoft.Extensions.DependencyInjection;
+namespace EmployeestWeb.BLL;
 
-    public static class DependencyInjection
+using Interfaces;
+using Services;
+using Microsoft.Extensions.DependencyInjection;
+
+public static class DependencyInjection
+{
+    public static void AddBLL(this IServiceCollection services)
     {
-        public static void AddBLL(this IServiceCollection services)
-        {
-            // Register services
-        }
+        services.AddScoped<IUserService, UserService>();
+        services.AddHttpContextAccessor();
     }
 }

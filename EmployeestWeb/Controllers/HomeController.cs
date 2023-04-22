@@ -13,12 +13,7 @@
             this.logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return this.View();
-        }
-
-        public IActionResult Privacy()
+        public IActionResult Home()
         {
             return this.View();
         }

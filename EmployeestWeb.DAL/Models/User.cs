@@ -7,7 +7,6 @@
     {
         public User()
         {
-            this.EventMembers = new HashSet<EventMember>();
             this.ProjectMembers = new HashSet<ProjectMember>();
             this.Projects = new HashSet<Project>();
             this.Tasks = new HashSet<Task>();
@@ -25,8 +24,6 @@
         public string PhoneNumber { get; set; } = null!;
 
         public bool IsBusinessOwner { get; set; }
-
-        public virtual ICollection<EventMember> EventMembers { get; set; }
 
         public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
 

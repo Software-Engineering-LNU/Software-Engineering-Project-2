@@ -31,8 +31,6 @@ namespace EmployeestWeb
             builder.Services.AddBLL();
             builder.Services.AddDAL();
 
-            builder.Services.AddControllersWithViews();
-
             builder.Services.AddDbContext<EmployeestWebDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("EmployeestDbConnString"), npgsqlOptions =>
                 {
@@ -41,6 +39,8 @@ namespace EmployeestWeb
                         maxRetryDelay: TimeSpan.FromSeconds(5),
                         errorCodesToAdd: new List<string> { "4060" });
                 }));
+
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
@@ -64,7 +64,7 @@ namespace EmployeestWeb
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Home}/{id?}");
 
             try
             {
