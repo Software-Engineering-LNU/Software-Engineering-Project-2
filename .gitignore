@@ -35,5 +35,4 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
-EmployeestWeb/Logs/logs.txt
-EmployeestWeb/Logs/logs.json
+EmployeestWeb/Logs/
