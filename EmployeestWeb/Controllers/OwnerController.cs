@@ -4,9 +4,15 @@
 
     public class OwnerController : Controller
     {
-        public IActionResult Workers()
+        public IActionResult Dashboard()
         {
             // Add your code to display the Employee dashboard page
+            return this.View();
+        }
+
+        public IActionResult Workers()
+        {
+            // Add your code to display the Employee workers page
             return this.View();
         }
     }
