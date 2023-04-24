@@ -1,69 +1,93 @@
-﻿@{
+﻿@using EmployeestWeb.Models
+@model EmployeestWeb.Models.EmployeeViewModel
+@{
     ViewData["Title"] = "Dashboard";
+    ViewData["UserName"] = Model.FullName;
 }
 
 <div class="dashboard">
     <div class="block">
         <header class="header">
             <h3>Home</h3>
-            <h1>Welcome, User Name</h1>
+            <h1>Welcome, @Model.FullName</h1>
         </header>
         <div class="blocks">
             <div class="first-row">
                 <div class="content-block my-projects">
                     <div class="block-heading">
                         <h2 class="heading project-heading">My projects</h2>
-                        <div class="counter project-counter">1</div>
+                        @{
+                            int projectsSize = 0;
+                            if (Model.Projects != null)
+                            {
+                                projectsSize = Model.Projects.Count();
+                            }
+                            <div class="counter project-counter">@projectsSize</div>
+                        }
                     </div>
                     <div class="project">
-                        <img
-                            class="project-avatar"
-                            src="~/assets/project-avatar.svg"
-                            alt="Icon for project">
-                        <div class="project-content">
-                            <div class="project-name-wrapper">
-                                <div class="project-name">Employeest project</div>
-                                <div class="teams-label">5 teams</div>
-                            </div>
-                            <a class="more-info">View more information</a>
-                        </div>
+                        @{
+                            if (Model.Projects != null) 
+                            {
+                                int i = 0;
+                                foreach (var project in Model.Projects) 
+                                {
+                                    if (i < 2) {
+                                        <img class="project-avatar"
+                                        src="~/assets/project-avatar.svg"
+                                        alt="Icon for project">
+                                        <div class="project-content">
+                                            <div class="project-name-wrapper">
+                                                <div class="project-name">@project.Name</div>
+                                            </div>
+                                            <div><a class="more-info">View more information</a></div>
+                                        </div>
+                                        ++i;
+                                    }
+                                }
+                            }
+                        }
                     </div>
                 </div>
                 <div class="content-block my-team">
                     <div class="block-heading">
-                        <h2 class="heading project-heading">My team</h2>
-                        <div class="counter project-counter">5</div>
+                        <h2 class="heading project-heading">My teams</h2>
+                        @{
+                            int teamsSize = 0;
+                            if (Model.Teams != null)
+                            {
+                                teamsSize = Model.Teams.Count();
+                            }
+                            <div class="counter project-counter">@teamsSize</div>
+                        }
                     </div>
                     <div class="team-list-wrapper">
                         <div class="team-list">
                             <div class="member-body">
-                                <img
-                                    class="member-avatar"
-                                    src="~/assets/team-member-avatar.svg"
-                                    alt="">
-                                <div class="member-content">
-                                    <div class="name-wrapper">
-                                        <div class="member-name">Full name</div>
-                                        <div class="position">Position</div>
-                                    </div>
-                                    <a class="view-profile-link">View profile</a>
-                                </div>
-                            </div>
-                            <div class="member-body">
-                                <img
-                                    class="member-avatar"
-                                    src="~/assets/team-member-avatar.svg"
-                                    alt="">
-                                <div class="member-content">
-                                    <div class="name-wrapper">
-                                        <div class="member-name">Full name</div>
-                                        <div class="position">Position</div>
-                                    </div>
-                                    <a class="view-profile-link">View profile</a>
-                                </div>
+                                @{
+                                    if (Model.Teams != null)
+                                    {
+                                        int i = 0;
+                                        foreach (var team in Model.Teams)
+                                        {
+                                            if (i < 2)
+                                            {
+                                                <img class="member-avatar"
+                                                src="~/assets/team-member-avatar.svg"
+                                                alt="">
+                                                <div class="member-content">
+                                                    <div class="name-wrapper">
+                                                        <div class="member-name">@team.Name</div>
+                                                    </div>
+                                                    <div><a class="more-info">View more information</a></div>
+                                                </div>
+                                                ++i;
+                                            }
+                                        }
+                                    }
+                                }
                             </div>
                         </div>
-                        <a class="watch-more">Watch more</a>
                     </div>
                 </div>
             </div>
@@ -101,28 +125,31 @@
                 </div>
             </div>
             
-            @{ 
+            @{
                 var tasks = new List<string> { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5" };
             }
             <div class="task-list">
-                @foreach (var task in tasks)
+                @if (Model.Tasks != null)
                 {
-                    <div class="task">
-                        <div class="task-name-wrapper">
-                            <div class="task-indicator"></div>
-                            <div class="task-name">@task</div>
+                    foreach (var task in Model.Tasks)
+                    {
+                        <div class="task">
+                            <div class="task-name-wrapper">
+                                <div class="task-indicator"></div>
+                                <div class="task-name">@task.Name</div>
+                            </div>
+                            <div class="functionality-wrapper">
+                                <button class="start-task-button">
+                                    Start task
+                                </button>
+                                <button class="options-button">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="functionality-wrapper">
-                            <button class="start-task-button">
-                                Start task
-                            </button>
-                            <button class="options-button">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </button>
-                        </div>
-                    </div>
+                    }
                 }
             </div>
         </div>

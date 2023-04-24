@@ -5,7 +5,7 @@ public interface IUserRepository
 {
     void AddUser(User user);
 
-    User? GetUser(long id);
-
     User? GetUser(string email);
+
+    bool Exist(string email);
 }

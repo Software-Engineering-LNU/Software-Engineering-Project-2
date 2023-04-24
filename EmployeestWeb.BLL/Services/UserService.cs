@@ -14,28 +14,27 @@ public class UserService : IUserService
         this.userRepository = userRepository;
     }
 
-    public long? RegisterUser(User user)
+    public User? RegisterUser(User user)
     {
-        try
-        {
-            this.userRepository.GetUser(user.Email);
-            return null;
-        }
-        catch (InvalidOperationException)
+        if (!this.userRepository.Exist(user.Email))
         {
             this.userRepository.AddUser(user);
-            return user.Id;
+            return user;
+        }
+        else
+        {
+            return null;
         }
     }
 
-    public long? AuthorizeUser(string email, string password)
+    public User? AuthorizeUser(string email, string password)
     {
         try
         {
             User? user = this.userRepository.GetUser(email);
             if (user != null && user.Password.Equals(password))
             {
-                return user.Id;
+                return user;
             }
 
             return null;
@@ -44,10 +43,5 @@ public class UserService : IUserService
         {
             return null;
         }
-    }
-
-    public User? GetUser(long id)
-    {
-        return this.userRepository.GetUser(id);
     }
 }

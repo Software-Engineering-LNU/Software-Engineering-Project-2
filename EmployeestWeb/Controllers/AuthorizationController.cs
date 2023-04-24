@@ -26,22 +26,20 @@
         {
             if (this.ModelState.IsValid)
             {
-                long? id = this.userService.AuthorizeUser(email, password);
-                if (id != null)
+                User? user = this.userService.AuthorizeUser(email, password);
+                if (user != null)
                 {
-                    return this.RedirectToAction("Home", "Home");
-                }
-                else
-                {
-                    this.ModelState.AddModelError("InvalidSignIn", "Invalid login or password!");
+                    if (user.IsBusinessOwner)
+                    {
+                        return this.RedirectToAction("Dashboard", "Owner", new { userId = user.Id });
+                    }
+                    else
+                    {
+                        return this.RedirectToAction("Dashboard", "Employee", new { userId = user.Id });
+                    }
                 }
             }
 
-            return this.View();
-        }
-
-        public IActionResult SignUp()
-        {
             return this.View();
         }
 
@@ -51,10 +49,10 @@
         {
             if (user.Password.Equals(password) && this.ModelState.IsValid)
             {
-                long? id = this.userService.RegisterUser(user);
-                if (id != null)
+                User? registeredUser = this.userService.RegisterUser(user);
+                if (registeredUser != null)
                 {
-                    return this.RedirectToAction("Home", "Home");
+                    return this.RedirectToAction("Dashboard", "Owner", new { userId = registeredUser.Id });
                 }
                 else
                 {

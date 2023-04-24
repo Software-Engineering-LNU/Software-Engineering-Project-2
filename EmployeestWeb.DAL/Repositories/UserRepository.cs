@@ -20,13 +20,25 @@ public class UserRepository : IUserRepository
         this.context.SaveChanges();
     }
 
-    public User? GetUser(long id)
-    {
-        return this.context.Users?.Single(x => x.Id == id);
-    }
-
     public User? GetUser(string email)
     {
-        return this.context.Users?.Single(x => x.Email == email);
+        return this.context.Users?.Include(x => x.ProjectMembers)
+            .Include(x => x.Projects)
+            .Include(x => x.Tasks)
+            .Include(x => x.TeamMembers)
+            .Single(x => x.Email == email);
+    }
+
+    public bool Exist(string email)
+    {
+        try
+        {
+            this.context.Users?.Single(x => x.Email == email);
+            return true;
+        }
+        catch (InvalidOperationException)
+        {
+            return false;
+        }
     }
 }

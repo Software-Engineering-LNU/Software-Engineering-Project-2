@@ -10,5 +10,6 @@ public static class DependencyInjection
     {
         // Register services
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
     }
 }
