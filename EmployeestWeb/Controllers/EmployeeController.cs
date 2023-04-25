@@ -1,7 +1,6 @@
 ﻿namespace EmployeestWeb.Controllers
 {
     using EmployeestWeb.BLL.Interfaces;
-    using EmployeestWeb.BLL.Services;
     using EmployeestWeb.DAL.Models;
     using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
@@ -9,11 +8,15 @@
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService employeeService;
+        private readonly ITaskService taskService;
+        private readonly IUserService userService;
         private EmployeeViewModel employeeViewModel;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService, ITaskService taskService, IUserService userService)
         {
             this.employeeService = employeeService;
+            this.taskService = taskService;
+            this.userService = userService;
             this.employeeViewModel = new EmployeeViewModel();
         }
 

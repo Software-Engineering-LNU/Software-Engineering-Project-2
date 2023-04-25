@@ -38,6 +38,10 @@
                         return this.RedirectToAction("Dashboard", "Employee", new { userId = user.Id });
                     }
                 }
+                else
+                {
+                    this.ModelState.AddModelError("InvalidSignIn", "Invalid login or password!");
+                }
             }
 
             return this.View();
