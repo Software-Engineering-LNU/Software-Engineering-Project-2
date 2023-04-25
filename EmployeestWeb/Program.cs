@@ -53,7 +53,7 @@ public class Program
         {
             endpoints.MapControllerRoute(
                 name: "task",
-                pattern: "{controller=Task}/{action=Index}/{id?}");
+                pattern: "{controller=Authorization}/{action=SignIn}/{id?}");
         });
         app.Run();
     }

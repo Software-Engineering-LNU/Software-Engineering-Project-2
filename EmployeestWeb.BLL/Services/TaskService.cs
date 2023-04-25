@@ -11,10 +11,12 @@ public class TaskService : ITaskService
     private const string TaskNotFoundMessage = "Task with ID=[%s] does not exist.";
 
     private readonly ITaskRepository taskRepository;
+    private readonly IUserRepository userRepository;
 
-    public TaskService(ITaskRepository taskRepository)
+    public TaskService(ITaskRepository taskRepository, IUserRepository userRepository)
     {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
     public IEnumerable<Task> GetAllTasks()
@@ -32,6 +34,18 @@ public class TaskService : ITaskService
         }
 
         return task;
+    }
+
+    public IEnumerable<Task> GetTasksByUserId(long userId)
+    {
+        IEnumerable<Task>? tasks = this.userRepository.GetUser(userId)?.Tasks;
+
+        if (tasks == null)
+        {
+            throw new ArgumentException(TaskNotFoundMessage);
+        }
+
+        return tasks;
     }
 
     public void CreateTask(Task task)

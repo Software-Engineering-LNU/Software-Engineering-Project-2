@@ -1,12 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
 }
+@model EmployeestWeb.DAL.Models.User
 
+@section scripts
+{
+    <script>
+    let tasks = '@Model.Tasks';
+    console.log("JavaScript code is being executed");
+
+    function updateTaskStatus(checkbox)
+    {
+        let taskId = checkbox.getAttribute('data-task-id');
+        const checkboxLabel = document.getElementById("task-name-" + taskId);
+    
+        console.log("updateTaskStatus is executed");
+    
+        if (tasks[taskId]) {
+            if (checkbox.checked) {
+                console.log("Checkbox is checked");
+                tasks[taskId].Status = "Closed";
+            } else {
+                console.log("Checkbox is not checked");
+                tasks[taskId].Status = "New";
+            }
+        }
+        
+        checkboxLabel.classList.toggle("strikethrough");
+    }
+    </script>
+}
 <div class="dashboard">
     <div class="block">
         <header class="header">
             <h3>Home</h3>
-            <h1>Welcome, User Name</h1>
+            <h1>Welcome, @Model.FullName</h1>
         </header>
         <div class="blocks">
             <div class="first-row">
@@ -83,47 +111,35 @@
         <div class="tasks-block">
             <div class="tasks-heading-wrapper">
                 <h2 class="tasks-heading">My tasks</h2>
-                <div class="date-switcher">
-                    <button class="switch-button left-switch-button">
-                        <img class="switch-arrow" 
-                             src="~/assets/left-arrow.svg" 
-                             alt="Left arrow"
-                        >
-                    </button>
-                    <div class="day-label">Today</div>
-                    <button class="switch-button right-switch-button">
-                        <img 
-                            class="switch-arrow" 
-                            src="~/assets/right-arrow.svg" 
-                            alt="Right arrow"
-                        >
-                    </button>
-                </div>
             </div>
             
-            @{ 
-                var tasks = new List<string> { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5" };
+            @{
+                var tasks = Model.Tasks.OrderBy(task => task.Name);
             }
             <div class="task-list">
                 @foreach (var task in tasks)
                 {
                     <div class="task">
                         <div class="task-name-wrapper">
-                            <div class="task-indicator"></div>
-                            <div class="task-name">@task</div>
+                            <input type="checkbox" name="task-checkbox" id="task-checkbox" value="false" data-task-id="@task.Id" onclick="updateTaskStatus(this);" />
+                            <div class="task-name" id="task-name-@task.Id">@task.Name</div>
                         </div>
                         <div class="functionality-wrapper">
-                            <button class="start-task-button">
-                                Start task
-                            </button>
-                            <button class="options-button">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </button>
+                            <a asp-area="" asp-controller="Task" asp-route-id="@task.Id" asp-action="Details">
+                                <button class="options-button">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 }
+                <div class="create-task">
+                    <a asp-controller="Task" asp-action="Create">
+                        <button class="create-task-button">Create new task...</button>
+                    </a>
+                </div>
             </div>
         </div>
     </aside>

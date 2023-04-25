@@ -17,23 +17,23 @@ public class TaskRepository : ITaskRepository
     public IEnumerable<Task> GetAllTasks()
     {
         return this.context.Tasks?
-            .Include(t => t.User)
-            .Include(t => t.Team)
+            .Include(task => task.User)
+            .Include(task => task.Team).ThenInclude(t => t.Tasks)
             .ToList() ?? Enumerable.Empty<Task>();
     }
 
     public Task? GetTaskById(long id)
     {
         return this.context.Tasks?
-            .Include(t => t.User)
-            .Include(t => t.Team)
-            .FirstOrDefault(t => t.Id == id);
+            .Include(task => task.User)
+            .Include(task => task.Team).ThenInclude(t => t.Tasks)
+            .Single(t => t.Id == id);
     }
 
     public void CreateTask(Task task)
     {
         task.User = this.context.Users!.Find(task.UserId);
-        task.Team = this.context.Teams!.Find(task.TeamId);
+        task.Team = this.context.Teams!.Find(task.TeamId) !;
         this.context.Tasks!.Add(task);
         this.context.SaveChanges();
     }

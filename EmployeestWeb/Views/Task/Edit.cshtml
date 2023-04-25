@@ -1,8 +1,18 @@
+@{
+    ViewData["Title"] = "Edit task";
+    Layout = "~/Views/Shared/_LeftSidebar.cshtml";
+}
+
 @model EmployeestWeb.DAL.Models.Task
 
-<h2>Edit Task</h2>
+<style>
+    .block {
+    margin-top: 60px;
+       }
+</style>
+<form asp-action="Edit" class="block">
+    <h2>Edit Task</h2>
 
-<form asp-action="Edit">
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
@@ -35,10 +45,7 @@
         <span asp-validation-for="Status" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="submit" value="Save" class="btn btn-primary" /> |
+        <a asp-action="Details" asp-route-id="@Model.Id">Back to details</a>
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>

@@ -1,8 +1,18 @@
+@{
+    ViewData["Title"] = "Create task";
+    Layout = "~/Views/Shared/_LeftSidebar.cshtml";
+}
+
 @model EmployeestWeb.DAL.Models.Task
 
-<h2>Create</h2>
+<style>
+    .block {
+    margin-top: 60px;
+       }
+</style>
+<form asp-action="Create" class="block">
+    <h2>Create</h2>
 
-<form asp-action="Create">
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
         <input asp-for="Name" class="form-control" />
@@ -37,7 +47,3 @@
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
