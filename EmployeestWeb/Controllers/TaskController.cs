@@ -3,6 +3,7 @@
 using BLL.Interfaces;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 public class TaskController : Controller
 {
@@ -25,6 +26,7 @@ public class TaskController : Controller
 
         if (task == null)
         {
+            Log.Error("Task with specified Id not found: " + Convert.ToString(id));
             return this.NotFound();
         }
 
@@ -46,8 +48,7 @@ public class TaskController : Controller
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        var allErrors = this.ModelState.Values.SelectMany(x => x.Errors);
-
+        Log.Information("Task with specified Id created: " + Convert.ToString(task.Id));
         return this.View(task);
     }
 
@@ -57,6 +58,7 @@ public class TaskController : Controller
 
         if (task == null)
         {
+            Log.Error("Task with specified Id not found: " + Convert.ToString(id));
             return this.NotFound();
         }
 
@@ -69,6 +71,7 @@ public class TaskController : Controller
     {
         if (id != task.Id)
         {
+            Log.Error("Task with specified Id not found: " + Convert.ToString(id));
             return this.NotFound();
         }
 
@@ -78,6 +81,7 @@ public class TaskController : Controller
             return this.RedirectToAction(nameof(this.Index));
         }
 
+        Log.Information("Task with specified Id edited: " + Convert.ToString(id));
         return this.View(task);
     }
 
@@ -87,6 +91,7 @@ public class TaskController : Controller
 
         if (task == null)
         {
+            Log.Error("Task with specified Id not found: " + Convert.ToString(id));
             return this.NotFound();
         }
 
@@ -99,6 +104,7 @@ public class TaskController : Controller
     public ActionResult DeleteConfirmed(long id)
     {
         this.taskService.DeleteTask(id);
+        Log.Information("Task with specified Id deleted: " + Convert.ToString(id));
         return this.RedirectToAction(nameof(this.Index));
     }
 }

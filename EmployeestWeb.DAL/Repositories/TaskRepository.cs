@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Interfaces;
 using Models;
+using Serilog;
 
 public class TaskRepository : ITaskRepository
 {
@@ -24,10 +25,17 @@ public class TaskRepository : ITaskRepository
 
     public Task? GetTaskById(long id)
     {
-        return this.context.Tasks?
+        var toReturn = this.context.Tasks?
             .Include(task => task.User)
             .Include(task => task.Team).ThenInclude(t => t.Tasks)
             .Single(t => t.Id == id);
+
+        if (toReturn == null)
+        {
+            Log.Error("Task with specified Id not found: " + Convert.ToString(id));
+        }
+
+        return toReturn;
     }
 
     public void CreateTask(Task task)
