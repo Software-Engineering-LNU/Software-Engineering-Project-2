@@ -16,9 +16,9 @@ public class EmployeeRepository : IEmployeeRepository
         this.context = context;
     }
 
-    public User GetUser(long userId)
+    public User? GetUser(long userId)
     {
-        return this.context.Users.Single(x => x.Id == userId);
+        return this.context.Users?.Single(x => x.Id == userId);
     }
 
     public ICollection<Project>? GetProjects(long userId)

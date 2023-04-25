@@ -18,7 +18,13 @@ public class OwnerService : IOwnerService
     {
         try
         {
-            return this.ownerRepository.GetUser(userId).FullName;
+            User? user = this.ownerRepository.GetUser(userId);
+            if (user != null)
+            {
+                return user.FullName;
+            }
+
+            return null;
         }
         catch (InvalidOperationException)
         {

@@ -18,7 +18,13 @@ public class EmployeeService : IEmployeeService
     {
         try
         {
-            return this.employeeRepository.GetUser(userId).FullName;
+            User? user = this.employeeRepository.GetUser(userId);
+            if (user != null)
+            {
+                return user.FullName;
+            }
+
+            return null;
         }
         catch (InvalidOperationException)
         {

@@ -3,7 +3,7 @@ using Models;
 
 public interface IEmployeeRepository
 {
-    User GetUser(long userId);
+    User? GetUser(long userId);
 
     ICollection<Project>? GetProjects(long userId);
 

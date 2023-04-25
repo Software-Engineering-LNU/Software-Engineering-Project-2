@@ -7,5 +7,7 @@ public interface IUserRepository
 
     User? GetUser(string email);
 
+    User? GetUser(long id);
+
     bool Exist(string email);
 }
