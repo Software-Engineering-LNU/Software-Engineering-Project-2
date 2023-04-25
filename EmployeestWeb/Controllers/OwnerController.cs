@@ -15,6 +15,7 @@
             this.ownerViewModel = new OwnerViewModel();
         }
 
+        [HttpGet]
         public IActionResult Dashboard(long userId)
         {
             this.ownerViewModel.UserId = userId;

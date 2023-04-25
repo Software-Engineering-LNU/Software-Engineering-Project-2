@@ -46,6 +46,10 @@
 
             return this.View();
         }
+        public IActionResult SignUp()
+        {
+            return this.View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

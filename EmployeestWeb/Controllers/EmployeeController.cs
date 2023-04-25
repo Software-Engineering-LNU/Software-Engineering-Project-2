@@ -20,6 +20,7 @@
             this.employeeViewModel = new EmployeeViewModel();
         }
 
+        [HttpGet]
         public IActionResult Dashboard(long userId)
         {
             this.employeeViewModel.UserId = userId;
