@@ -1,13 +1,24 @@
 ﻿namespace EmployeestWeb.Controllers
 {
+    using EmployeestWeb.BLL.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
     public class EmployeeController : Controller
     {
-        public IActionResult Dashboard()
+        private readonly ITaskService taskService;
+        private readonly IUserService userService;
+
+        public EmployeeController(ITaskService taskService, IUserService userService)
+        {
+            this.taskService = taskService;
+            this.userService = userService;
+        }
+
+        public IActionResult Dashboard(long userId)
         {
             // Add your code to display the Employee dashboard page
-            return this.View();
+            var user = this.userService.GetUser(userId);
+            return this.View(user);
         }
     }
 }

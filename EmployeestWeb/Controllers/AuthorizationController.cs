@@ -29,7 +29,15 @@
                 long? id = this.userService.AuthorizeUser(email, password);
                 if (id != null)
                 {
-                    return this.RedirectToAction("Home", "Home");
+                    User user = this.userService.GetUser((long)id) ?? throw new InvalidOperationException(); // TODO: customize exception
+                    if (user.IsBusinessOwner)
+                    {
+                        return this.RedirectToAction("Home", "Home");
+                    }
+                    else
+                    {
+                        return this.RedirectToAction("Dashboard", "Employee", new { userId=id });
+                    }
                 }
                 else
                 {

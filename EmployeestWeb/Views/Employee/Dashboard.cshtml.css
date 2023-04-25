@@ -229,10 +229,10 @@ h3 {
 }
 
 .task-name {
-    font-size: 22px;
+    font-size: 18px;
 }
 
-.start-task-button {
+.create-task-button {
     display: flex;
     height: 28px;
     background-color: #7D7D7D;
@@ -241,13 +241,15 @@ h3 {
     padding: 6px 14px;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 300;
     border-radius: 2px;
     transition: opacity 0.2s ease-in-out;
+    flex-direction: column;
+    width: 100%;
 }
 
-.start-task-button:hover {
+.create-task-button:hover {
     opacity: 0.8;
 }
 
@@ -301,4 +303,9 @@ h3 {
 
 .day-label {
     font-size: 18px;
+}
+
+.strikethrough
+{
+    text-decoration: line-through;
 }

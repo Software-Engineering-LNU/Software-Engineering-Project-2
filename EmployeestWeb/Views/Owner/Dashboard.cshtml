@@ -1,12 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
 }
+@model EmployeestWeb.DAL.Models.User
 
 <div class="dashboard">
     <div class="main-block">
         <header class="header">
             <h3>Home</h3>
-            <h1>Welcome, User Name</h1>
+            <h1>Welcome, @Model.FullName</h1>
         </header>
         <div class="statistics-wrapper"></div>
     </div>
