@@ -14,9 +14,16 @@ public class EmployeeService : IEmployeeService
         this.employeeRepository = employeeRepository;
     }
 
-    public string GetUserName(long userId)
+    public string? GetUserName(long userId)
     {
-        return this.employeeRepository.GetUser(userId).FullName;
+        try
+        {
+            return this.employeeRepository.GetUser(userId).FullName;
+        }
+        catch (InvalidOperationException)
+        {
+            return null;
+        }
     }
 
     public ICollection<Project>? GetProjects(long userId)

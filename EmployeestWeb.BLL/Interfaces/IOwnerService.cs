@@ -2,13 +2,9 @@
 
 using EmployeestWeb.DAL.Models;
 
-public interface IEmployeeService
+public interface IOwnerService
 {
     string? GetUserName(long userId);
 
     ICollection<Project>? GetProjects(long userId);
-
-    ICollection<Task>? GetTasks(long userId);
-
-    ICollection<Team>? GetTeams(long userId);
 }

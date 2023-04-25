@@ -19,13 +19,18 @@
 
         public IActionResult Dashboard(long userId)
         {
-            // Add your code to display the Employee dashboard page
             this.employeeViewModel.UserId = userId;
-            this.employeeViewModel.FullName = this.employeeService.GetUserName(userId);
-            this.employeeViewModel.Projects = this.employeeService.GetProjects(userId);
-            this.employeeViewModel.Tasks = this.employeeService.GetTasks(userId);
-            this.employeeViewModel.Teams = this.employeeService.GetTeams(userId);
-            return this.View(this.employeeViewModel);
+            string? userName = this.employeeService.GetUserName(userId);
+            if (userName != null)
+            {
+                this.employeeViewModel.FullName = userName;
+                this.employeeViewModel.Projects = this.employeeService.GetProjects(userId);
+                this.employeeViewModel.Tasks = this.employeeService.GetTasks(userId);
+                this.employeeViewModel.Teams = this.employeeService.GetTeams(userId);
+                return this.View(this.employeeViewModel);
+            }
+
+            return this.View();
         }
     }
 }

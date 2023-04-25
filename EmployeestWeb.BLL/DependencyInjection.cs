@@ -10,6 +10,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddScoped<IOwnerService, OwnerService>();
+
         services.AddHttpContextAccessor();
     }
 }

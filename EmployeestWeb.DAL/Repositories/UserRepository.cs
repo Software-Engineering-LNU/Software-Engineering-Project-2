@@ -22,11 +22,7 @@ public class UserRepository : IUserRepository
 
     public User? GetUser(string email)
     {
-        return this.context.Users?.Include(x => x.ProjectMembers)
-            .Include(x => x.Projects)
-            .Include(x => x.Tasks)
-            .Include(x => x.TeamMembers)
-            .Single(x => x.Email == email);
+        return this.context.Users?.Single(x => x.Email == email);
     }
 
     public bool Exist(string email)
