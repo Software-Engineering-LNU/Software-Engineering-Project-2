@@ -4,6 +4,7 @@ using Interfaces;
 using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
+using Serilog;
 
 public class OwnerService : IOwnerService
 {
@@ -16,6 +17,7 @@ public class OwnerService : IOwnerService
 
     public string? GetUserName(long userId)
     {
+        Log.Information("OwnerService GetUserName {@userId}", userId);
         try
         {
             User? user = this.ownerRepository.GetUser(userId);
@@ -28,18 +30,21 @@ public class OwnerService : IOwnerService
         }
         catch (InvalidOperationException)
         {
+            Log.Error("OwnerService GetUserName {@userId} InvalidOperationException", userId);
             return null;
         }
     }
 
     public ICollection<Project>? GetProjects(long userId)
     {
+        Log.Information("OwnerService GetProjects {@userId}", userId);
         try
         {
             return this.ownerRepository.GetProjects(userId);
         }
         catch (InvalidOperationException)
         {
+            Log.Error("OwnerService GetProjects {@userId} InvalidOperationException", userId);
             return null;
         }
     }

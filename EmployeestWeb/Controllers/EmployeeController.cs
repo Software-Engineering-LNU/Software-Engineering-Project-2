@@ -4,6 +4,7 @@
     using EmployeestWeb.DAL.Models;
     using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Serilog;
 
     public class EmployeeController : Controller
     {
@@ -23,10 +24,12 @@
         [HttpGet]
         public IActionResult Dashboard(long userId)
         {
+            Log.Information("EmployeeController Dashboard {@userId}", userId);
             this.employeeViewModel.UserId = userId;
             string? userName = this.employeeService.GetUserName(userId);
             if (userName != null)
             {
+                Log.Error("EmployeeController InvalidUserName {@userId}", userId);
                 this.employeeViewModel.FullName = userName;
                 this.employeeViewModel.Projects = this.employeeService.GetProjects(userId);
                 this.employeeViewModel.Tasks = this.employeeService.GetTasks(userId);

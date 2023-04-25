@@ -4,6 +4,8 @@ using Interfaces;
 using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
+using Serilog;
+using System.Threading.Tasks;
 
 public class UserService : IUserService
 {
@@ -16,6 +18,7 @@ public class UserService : IUserService
 
     public User? RegisterUser(User user)
     {
+        Log.Information("UserService RegisterUser {@user}", user);
         if (!this.userRepository.Exist(user.Email))
         {
             this.userRepository.AddUser(user);
@@ -23,6 +26,7 @@ public class UserService : IUserService
         }
         else
         {
+            Log.Error("UserService RegisterUser User {@user} already exist", user);
             return null;
         }
     }
@@ -31,6 +35,7 @@ public class UserService : IUserService
     {
         try
         {
+            Log.Information("UserService AuthorizedUser {@email} {@password}", email, password);
             User? user = this.userRepository.GetUser(email);
             if (user != null && user.Password.Equals(password))
             {
@@ -41,6 +46,7 @@ public class UserService : IUserService
         }
         catch (InvalidOperationException)
         {
+            Log.Information("UserService AuthorizedUser {@email} {@password} InvalidOperationException", email, password);
             return null;
         }
     }

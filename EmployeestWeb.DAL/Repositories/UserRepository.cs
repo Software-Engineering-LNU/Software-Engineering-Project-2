@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Interfaces;
 using Models;
+using Serilog;
 
 public class UserRepository : IUserRepository
 {
@@ -16,12 +17,14 @@ public class UserRepository : IUserRepository
 
     public void AddUser(User user)
     {
+        Log.Information("UserRepository AddUser {@user}", user);
         this.context.Users!.Add(user);
         this.context.SaveChanges();
     }
 
     public User? GetUser(long id)
     {
+        Log.Information("UserRepository GetUser {@id}", id);
         return this.context.Users?
             .Include(u => u.Tasks)
             .ThenInclude(t => t.Team)
@@ -36,6 +39,7 @@ public class UserRepository : IUserRepository
 
     public User? GetUser(string email)
     {
+        Log.Information("UserRepository GetUser {@email}", email);
         return this.context.Users?
             .Include(u => u.Tasks)
             .ThenInclude(t => t.Team)
@@ -50,6 +54,7 @@ public class UserRepository : IUserRepository
 
     public bool Exist(string email)
     {
+        Log.Information("UserRepository Exist {@email}", email);
         try
         {
             this.context.Users?.Single(x => x.Email == email);

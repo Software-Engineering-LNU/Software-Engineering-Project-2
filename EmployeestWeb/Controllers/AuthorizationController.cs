@@ -5,6 +5,7 @@
     using EmployeestWeb.DAL.Models;
     using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Serilog;
 
     public class AuthorizationController : Controller
     {
@@ -17,6 +18,7 @@
 
         public IActionResult SignIn()
         {
+            Log.Information("AuthorizationController SignIn");
             return this.View();
         }
 
@@ -24,6 +26,7 @@
         [ValidateAntiForgeryToken]
         public IActionResult SignIn(string email, string password)
         {
+            Log.Information("AuthorizationController SignIn {@email} {@password}", email, password);
             if (this.ModelState.IsValid)
             {
                 User? user = this.userService.AuthorizeUser(email, password);
@@ -40,14 +43,17 @@
                 }
                 else
                 {
+                    Log.Error("AuthorizationController InvalidSignIn {@email} {@password}", email, password);
                     this.ModelState.AddModelError("InvalidSignIn", "Invalid login or password!");
                 }
             }
 
             return this.View();
         }
+
         public IActionResult SignUp()
         {
+            Log.Information("AuthorizationController SignUp");
             return this.View();
         }
 
@@ -55,6 +61,7 @@
         [ValidateAntiForgeryToken]
         public IActionResult SignUp(User user, string password)
         {
+            Log.Information("AuthorizationController SignUp {@user}", user);
             if (user.Password.Equals(password) && this.ModelState.IsValid)
             {
                 User? registeredUser = this.userService.RegisterUser(user);
@@ -64,6 +71,7 @@
                 }
                 else
                 {
+                    Log.Error("AuthorizationController InvalidSignUp {@user}", user);
                     this.ModelState.AddModelError("InvalidSignUp", "This user already exist!");
                 }
             }
@@ -74,6 +82,7 @@
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            Log.Information("AuthorizationController Error");
             return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
