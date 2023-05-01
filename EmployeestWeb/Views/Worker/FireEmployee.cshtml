@@ -1,8 +1,13 @@
 ﻿@model FireEmployeeModel
 
-@using (Html.BeginForm("FireEmployee", "Worker", FormMethod.Post))
-{
-    @Html.DropDownList("PropertyName", new SelectList(typeof(FireEmployeeModel).GetProperties().Select(p => p.Name)))
-    @Html.TextBox("PropertyValue")
-    <button type="submit">Search</button>
-}
+<link href="@Url.Content("~/wwwroot/css/site.css")" rel="stylesheet" type="text/css" />
+<div class="add-employee-form">
+    @Html.ValidationSummary()
+    <form asp-action="FireEmployee" asp-controller="Worker" method="post">
+
+        @Html.DropDownList("PropertyName", new SelectList(typeof(FireEmployeeModel).GetProperties().Select(p => p.Name)))
+        @Html.TextBox("PropertyValue")
+        <button type="submit" class="add-employee-btn">Search</button>
+    </form>
+
+</div>
