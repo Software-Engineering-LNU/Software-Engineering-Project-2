@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EmployeestWeb</title>
+    <title>@ViewData["Title"] - Employeest</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EmployeestWeb.styles.css" asp-append-version="true" />
@@ -33,17 +33,54 @@
             </div>
         </nav>
     </header>
+    <aside>
+        <div class="sidebar">
+            <button class="mini-logo">
+                <img
+                    class="mini-logo-icon"
+                    src="~/assets/mini-logo.svg" 
+                    alt="Mini Employeest logo"
+                >
+            </button>
+            <nav class="aside-navbar-wrapper">
+                <div class="aside-navbar">
+                    <button class="nav-button">
+                        <img class="nav-button-icon"
+                             src="~/assets/home-icon.svg" 
+                             alt="Home icon"
+                        >
+                    </button>
+                    <button class="nav-button">
+                        <img class="nav-button-icon" 
+                             src="~/assets/team-icon.svg" 
+                             alt="Team icon"
+                        >
+                    </button>
+                </div>
+            </nav>
+            <div class="nothing-box"></div>
+        </div>
+    </aside>
+    <div class="user-block">
+                    <button class="options-button">
+                        <img src="~/assets/settings-icon.svg" alt="Settings icon">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-content">
+                            <div class="user-name">User Name</div>
+                            <div class="user-position">Employee</div>
+                        </div>
+                        <button class="user-avatar-button">
+                            <img src="~/assets/team-member-avatar.svg" alt="User avatar">
+                            <img src="~/assets/bottom-arrow-filled.svg" alt="Bottom filled arrow">
+                        </button>
+                    </div>
+                </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - EmployeestWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

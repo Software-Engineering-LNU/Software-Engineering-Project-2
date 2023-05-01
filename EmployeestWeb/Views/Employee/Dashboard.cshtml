@@ -1,0 +1,146 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+@model EmployeestWeb.DAL.Models.User
+
+@section scripts
+{
+    <script>
+    let tasks = '@Model.Tasks';
+    console.log("JavaScript code is being executed");
+
+    function updateTaskStatus(checkbox)
+    {
+        let taskId = checkbox.getAttribute('data-task-id');
+        const checkboxLabel = document.getElementById("task-name-" + taskId);
+    
+        console.log("updateTaskStatus is executed");
+    
+        if (tasks[taskId]) {
+            if (checkbox.checked) {
+                console.log("Checkbox is checked");
+                tasks[taskId].Status = "Closed";
+            } else {
+                console.log("Checkbox is not checked");
+                tasks[taskId].Status = "New";
+            }
+        }
+        
+        checkboxLabel.classList.toggle("strikethrough");
+    }
+    </script>
+}
+<div class="dashboard">
+    <div class="block">
+        <header class="header">
+            <h3>Home</h3>
+            <h1>Welcome, @Model.FullName</h1>
+        </header>
+        <div class="blocks">
+            <div class="first-row">
+                <div class="content-block my-projects">
+                    <div class="block-heading">
+                        <h2 class="heading project-heading">My projects</h2>
+                        <div class="counter project-counter">1</div>
+                    </div>
+                    <div class="project">
+                        <img
+                            class="project-avatar"
+                            src="~/assets/project-avatar.svg"
+                            alt="Icon for project">
+                        <div class="project-content">
+                            <div class="project-name-wrapper">
+                                <div class="project-name">Employeest project</div>
+                                <div class="teams-label">5 teams</div>
+                            </div>
+                            <a class="more-info">View more information</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-block my-team">
+                    <div class="block-heading">
+                        <h2 class="heading project-heading">My team</h2>
+                        <div class="counter project-counter">5</div>
+                    </div>
+                    <div class="team-list-wrapper">
+                        <div class="team-list">
+                            <div class="member-body">
+                                <img
+                                    class="member-avatar"
+                                    src="~/assets/team-member-avatar.svg"
+                                    alt="">
+                                <div class="member-content">
+                                    <div class="name-wrapper">
+                                        <div class="member-name">Full name</div>
+                                        <div class="position">Position</div>
+                                    </div>
+                                    <a class="view-profile-link">View profile</a>
+                                </div>
+                            </div>
+                            <div class="member-body">
+                                <img
+                                    class="member-avatar"
+                                    src="~/assets/team-member-avatar.svg"
+                                    alt="">
+                                <div class="member-content">
+                                    <div class="name-wrapper">
+                                        <div class="member-name">Full name</div>
+                                        <div class="position">Position</div>
+                                    </div>
+                                    <a class="view-profile-link">View profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="watch-more">Watch more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="second-row">
+                <div class="content-block statistics">
+                    <div class="block-heading">
+                        <h2 class="heading statistics-heading">Statistics</h2>
+                        <div class="statistics-label">Working hours per day</div>
+                    </div>
+                    <div class="stat-block"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <aside class="aside-block">
+        <div class="tasks-block">
+            <div class="tasks-heading-wrapper">
+                <h2 class="tasks-heading">My tasks</h2>
+            </div>
+            
+            @{
+                var tasks = Model.Tasks.OrderBy(task => task.Name);
+            }
+            <div class="task-list">
+                @foreach (var task in tasks)
+                {
+                    <div class="task">
+                        <div class="task-name-wrapper">
+                            <input type="checkbox" name="task-checkbox" id="task-checkbox" value="false" data-task-id="@task.Id" onclick="updateTaskStatus(this);" />
+                            <div class="task-name" id="task-name-@task.Id">@task.Name</div>
+                        </div>
+                        <div class="functionality-wrapper">
+                            <a asp-area="" asp-controller="Task" asp-route-id="@task.Id" asp-action="Details">
+                                <button class="options-button">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                }
+                <div class="create-task">
+                    <a asp-controller="Task" asp-action="Create">
+                        <button class="create-task-button">Create new task...</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

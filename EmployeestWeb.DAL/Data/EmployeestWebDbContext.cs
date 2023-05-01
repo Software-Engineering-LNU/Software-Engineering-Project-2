@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.DAL.Data
+namespace EmployeestWeb.DAL.Data
 {
     using EmployeestWeb.DAL.Models;
     using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,7 @@
 
         public virtual DbSet<Team>? Teams { get; set; }
 
-        public virtual DbSet<TeamMember>? TeamMembers { get; set; }
+        public virtual DbSet<TeamMember> TeamMembers { get; set; } = null!;
 
         public virtual DbSet<User> Users { get; set; } = null!;
 

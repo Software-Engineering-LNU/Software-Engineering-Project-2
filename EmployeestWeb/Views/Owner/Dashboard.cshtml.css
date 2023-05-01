@@ -1,0 +1,139 @@
+﻿.aside-block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 470px;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.counter {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: #808080;
+    font-size: 20px;
+    color: #fff;
+    border: none;
+}
+
+.heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.project-block {
+    margin-top: 215px;
+    display: flex;
+    flex-direction: column;
+    gap: 62px;
+}
+
+.project-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.project-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.dot {
+    width: 3px;
+    height: 3px;
+    background-color: #000;
+    border-radius: 100%;
+}
+
+.options-button {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    padding: 20px;
+}
+
+.team-button {
+    display: flex;
+    background-color: transparent;
+    border: none;
+    height: 25px;
+}
+
+.actions {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 415px;
+}
+
+.teams {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.heading {
+    font-size: 20px;
+}
+
+.view-more {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.statistics-wrapper {
+    width: 900px;
+    height: 500px;
+    background-color: #E9E9E9;
+}
+
+.main-block {
+    display: flex;
+    flex-direction: column;
+    gap: 140px;
+}
