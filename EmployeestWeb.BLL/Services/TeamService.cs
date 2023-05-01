@@ -17,17 +17,24 @@
 
         public async System.Threading.Tasks.Task AddEmployee(int teamId, string email)
         {
-            var user = await this.workerRepository.GetEmployeeByEmail(email);
-
-            if (user is not null)
+            try
             {
-                TeamMember teamMember = new TeamMember
-                {
-                    TeamId = teamId,
-                    UserId = user.Id,
-                };
+                var user = await this.workerRepository.GetEmployeeByEmail(email);
 
-                await this.teamRepository.AddEmployee(teamMember);
+                if (user is not null)
+                {
+                    TeamMember teamMember = new TeamMember
+                    {
+                        TeamId = teamId,
+                        UserId = user.Id,
+                    };
+
+                    await this.teamRepository.AddEmployee(teamMember);
+                }
+            }
+            catch
+            {
+                throw;
             }
         }
     }

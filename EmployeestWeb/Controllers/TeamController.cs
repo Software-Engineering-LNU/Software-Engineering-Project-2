@@ -8,8 +8,6 @@
     {
         private readonly ITeamService teamService;
 
-        private int teamId = 1;  // TODO: Change this
-
         public TeamController(ITeamService teamService)
         {
             this.teamService = teamService;
@@ -18,18 +16,30 @@
         [HttpGet]
         public IActionResult AddEmployee()
         {
-            return this.View();
+            var model = new AddEmployeeTeamViewModel
+            {
+                TeamId = 1,
+            };
+
+            return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult AddEmployee(AddEmployeeTeamModel model)
+        public IActionResult AddEmployee(AddEmployeeTeamViewModel model)
         {
             if (this.ModelState.IsValid)
             {
-                this.teamService.AddEmployee(this.teamId, model.Email);
+                try
+                {
+                    this.teamService.AddEmployee(model.TeamId, model.Email);
+                }
+                catch (Exception ex)
+                {
+                    return this.View(new ErrorViewModel { Message = ex.Message });
+                }
             }
 
-            return this.View(); // TODO: Change route
+            return this.RedirectToAction("Home", "Home"); // TODO: Change route
         }
     }
 }
