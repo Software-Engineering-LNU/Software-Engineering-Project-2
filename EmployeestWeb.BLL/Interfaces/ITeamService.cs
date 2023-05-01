@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.BLL.Services.Interfaces
+﻿namespace EmployeestWeb.BLL.Interfaces
 {
     using EmployeestWeb.DAL.Models;
 

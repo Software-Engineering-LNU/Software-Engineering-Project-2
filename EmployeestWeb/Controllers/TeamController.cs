@@ -1,6 +1,6 @@
 ﻿namespace EmployeestWeb.Controllers
 {
-    using EmployeestWeb.BLL.Services.Interfaces;
+    using EmployeestWeb.BLL.Interfaces;
     using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
 

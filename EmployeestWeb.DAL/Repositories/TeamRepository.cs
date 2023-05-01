@@ -1,8 +1,8 @@
-﻿namespace EmployeestWeb.DAL.Repositories.Implementation
+﻿namespace EmployeestWeb.DAL.Repositories
 {
     using EmployeestWeb.DAL.Data;
+    using EmployeestWeb.DAL.Interfaces;
     using EmployeestWeb.DAL.Models;
-    using EmployeestWeb.DAL.Repositories.Interfaces;
 
     public class TeamRepository : ITeamRepository
     {

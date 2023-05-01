@@ -1,8 +1,8 @@
-﻿namespace EmployeestWeb.BLL.Services.Implementation
+﻿namespace EmployeestWeb.BLL.Services
 {
-    using EmployeestWeb.BLL.Services.Interfaces;
+    using EmployeestWeb.BLL.Interfaces;
+    using EmployeestWeb.DAL.Interfaces;
     using EmployeestWeb.DAL.Models;
-    using EmployeestWeb.DAL.Repositories.Interfaces;
 
     public class TeamService : ITeamService
     {

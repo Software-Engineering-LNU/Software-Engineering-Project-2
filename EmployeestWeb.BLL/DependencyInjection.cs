@@ -1,7 +1,7 @@
 namespace EmployeestWeb.BLL
 {
-    using EmployeestWeb.BLL.Services.Implementation;
-    using EmployeestWeb.BLL.Services.Interfaces;
+    using EmployeestWeb.BLL.Interfaces;
+    using EmployeestWeb.BLL.Services;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class DependencyInjection
@@ -10,6 +10,10 @@ namespace EmployeestWeb.BLL
         {
             // Register services
             services.AddTransient<ITeamService, TeamService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddHttpContextAccessor();
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿namespace EmployeestWeb.DAL.Repositories.Implementation
+﻿namespace EmployeestWeb.DAL.Repositories
 {
     using EmployeestWeb.DAL.Data;
+    using EmployeestWeb.DAL.Interfaces;
     using EmployeestWeb.DAL.Models;
-    using EmployeestWeb.DAL.Repositories.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class WorkerRepository : IWorkerRepository
@@ -37,7 +37,7 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async System.Threading.Tasks.Task<User?> GetEmployeeByEmail(string email)
+        public async Task<User?> GetEmployeeByEmail(string email)
         {
             var user = await this.db.Users.FirstOrDefaultAsync(x => x.Email == email);
             if (user is not null)
