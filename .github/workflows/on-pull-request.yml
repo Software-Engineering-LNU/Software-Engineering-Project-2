@@ -81,6 +81,10 @@ jobs:
           dotnet build EmployeestWeb.sln --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           
+  run-tests:
+    name: Run unit tests
+    runs-on: windows-latest
+    steps:
       - name: set pr build number (if pr)
         id: PRNUMBER
         if: ${{ github.event_name == 'pull_request' }}
