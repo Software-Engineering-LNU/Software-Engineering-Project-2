@@ -25,7 +25,7 @@
         }
 
         [HttpPost]
-        public IActionResult AddEmployee(AddEmployeeModel model)
+        public IActionResult AddEmployee(AddEmployeeViewModel model)
         {
             if (this.ModelState.IsValid)
             {

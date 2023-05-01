@@ -1,7 +1,9 @@
 ﻿namespace EmployeestWeb.Controllers
 {
     using EmployeestWeb.BLL.Interfaces;
+    using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Serilog;
 
     public class EmployeeController : Controller
     {

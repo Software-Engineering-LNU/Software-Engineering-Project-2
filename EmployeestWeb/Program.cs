@@ -13,10 +13,11 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddBLL();
-            builder.Services.AddDAL();
-            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+        // Add services to the container.
+        builder.Services.AddBLL();
+        builder.Services.AddDAL();
+        builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
         // Add logger
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Configuration)

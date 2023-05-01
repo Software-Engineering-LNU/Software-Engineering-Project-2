@@ -5,6 +5,7 @@ using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+using EmployeestWeb.BLL.Interfaces;
 
 public class ProjectService : IProjectService
 {

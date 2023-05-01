@@ -9,7 +9,7 @@
     {
         public AutoMapperProfile()
         {
-            this.CreateMap<AddEmployeeModel, User>().ReverseMap();
+            this.CreateMap<AddEmployeeViewModel, User>().ReverseMap();
             this.CreateMap<Models.FireEmployeeModel, User>().ReverseMap();
             this.CreateMap<Models.FireEmployeeModel, BLL.Models.FireEmployeeModel>().ReverseMap();
         }

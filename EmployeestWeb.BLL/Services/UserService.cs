@@ -4,6 +4,7 @@ using Interfaces;
 using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
+using EmployeestWeb.BLL.Interfaces;
 
 public class UserService : IUserService
 {
