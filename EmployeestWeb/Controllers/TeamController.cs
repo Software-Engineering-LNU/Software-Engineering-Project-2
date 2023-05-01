@@ -3,6 +3,7 @@
     using EmployeestWeb.BLL.Interfaces;
     using EmployeestWeb.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Serilog;
 
     public class TeamController : Controller
     {
@@ -35,6 +36,7 @@
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex.Message);
                     this.ModelState.AddModelError(string.Empty, "Error in AddEmployee " + ex.Message);
                     return this.View(model);
                 }
@@ -68,6 +70,7 @@
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex.Message);
                     this.ModelState.AddModelError(string.Empty, "Error in RemoveEmployee " + ex.Message);
                     return this.View(model);
                 }
