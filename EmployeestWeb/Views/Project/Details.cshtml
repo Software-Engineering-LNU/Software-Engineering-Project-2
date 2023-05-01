@@ -1,0 +1,81 @@
+@model EmployeestWeb.DAL.Models.Project
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner!.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner!.FullName)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Project Members</h4>
+    <hr/>
+    @if (Model.ProjectMembers != null && Model.ProjectMembers.Any())
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Salary
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var member in Model.ProjectMembers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => member.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => member.Position.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => member.Salary)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No project members found.</p>
+    }
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

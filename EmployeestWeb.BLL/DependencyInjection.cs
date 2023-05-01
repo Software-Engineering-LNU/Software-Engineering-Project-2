@@ -1,4 +1,4 @@
-﻿namespace EmployeestWeb.BLL
+namespace EmployeestWeb.BLL
 {
     using EmployeestWeb.BLL.Services.Implementation;
     using EmployeestWeb.BLL.Services.Interfaces;

@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_AuthorizationLayout.cshtml";
+}
+<style>
+    .section {
+        padding: 8% 20px 0;
+        color: #5A5A5A;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .title {
+        font-size: 50px;
+    }
+    .abbreviation {
+        margin: 0px 65px;
+        font-size: 14px;
+    }
+    .abbreviation span {
+        color: #FF0000;
+    }
+    .heading {
+        text-align:center;
+        width: 100%;
+        color: #E6E6E6;
+        font-size: 80px;
+    }
+    h3 {
+        margin: 50px 0 15%;
+        text-align: right;
+    }
+    .navigationItem {
+        text-align: right;
+        margin: 100px 0;
+        text-decoration: underline;
+    }
+    .navigationItem a {
+        color: #5A5A5A;
+    }
+    .twoColumnText {
+        column-count: 2;
+        column-gap: 150px;
+        font-size: 18px;
+        margin: 10% 70px 0;
+    }
+    .oneColumnText {
+        font-size: 18px;
+        margin: 10% 50% 0 70px;
+    }
+
+</style>
+
+<div class="section">
+    <h2 class="title">Best CRM system in Ukraine</h2>
+    <p class="abbreviation"><span>C</span>ustomer <span>R</span>elationship <span>M</span>anagement</p>
+    <h3>Feel the opportunity</h3>
+    <nav class="navigationItem" aria-label="SignUp link">
+        <a asp-area="" asp-controller="Authorization" asp-action="SignUp">Try in now</a>
+    </nav>
+</div>
+<div class="section">
+    <h1 class="heading">EMPLOYEEST</h1>
+    <p class="twoColumnText">
+        Employeest is a versatile CRM system that caters to the needs of a wide range of businesses and industries. 
+        Whether you are running a small start-up or managing a large corporation, 
+        Employees offers a comprehensive set of tools and features to help you streamline your workflow, manage your customer relationships, 
+        and boost your productivity. With its user-friendly interface and customizable options, 
+        Employees is easy to use and can be tailored to suit your specific requirements. One of the standout features of Employees is its flexibility. 
+        You can choose from a variety of preferences and settings to create a CRM system that works best for your business. 
+        Whether you need to track sales leads, manage customer contacts, or automate your marketing campaigns.
+        Employeest has everything you need to get the job done. With its powerful reporting and analytics tools, 
+        you can also gain valuable insights into your customer behavior and make data-driven decisions to improve your business performance. 
+        Overall, Employees is an excellent choice for any business looking for a reliable and efficient CRM system to help them succeed in today's competitive marketplace.
+    </p>
+</div>
+<div class="section">
+    <h1 class="heading"> HOW TO USE?</h1>
+    <p class="oneColumnText">
+        Employeest is designed to be user-friendly. After registering, you can create your customer base, add your products or services, and manage your sales pipeline. 
+        The platform provides tools such as contact management, sales forecasting, and marketing automation.
+    </p>
+    <nav class="navigationItem" aria-label="Authorization link2">
+        <a asp-area="" asp-controller="Authorization" asp-action="SignUp">Try in now</a>
+    </nav>
+</div>
