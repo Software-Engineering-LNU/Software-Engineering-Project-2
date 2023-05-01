@@ -31,6 +31,37 @@
 
                     await this.teamRepository.AddEmployee(teamMember);
                 }
+                else
+                {
+                    throw new Exception("User with this email not found!");
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async System.Threading.Tasks.Task RemoveEmployee(int teamId, string email, int userId)
+        {
+            try
+            {
+                var user = await this.workerRepository.GetEmployeeByEmail(email);
+
+                if (user is not null)
+                {
+                    TeamMember teamMember = new TeamMember
+                    {
+                        TeamId = teamId,
+                        UserId = user.Id,
+                    };
+
+                    await this.teamRepository.RemoveEmployee(teamMember);
+                }
+                else
+                {
+                    throw new Exception("User with this email not found!");
+                }
             }
             catch
             {
