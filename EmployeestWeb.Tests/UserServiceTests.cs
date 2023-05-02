@@ -7,17 +7,24 @@ namespace EmployeestWeb.Tests
 {
     public class UserServiceTests
     {
+        private readonly Mock<IUserRepository> userRepositoryMock;
+        private readonly UserService userService;
+
+        private static readonly long testId = 1;
+        private static readonly string testEmail = "test@gmail.com";
+        private static readonly string testPassword = "password";
+        public UserServiceTests()
+        {
+            userRepositoryMock = new Mock<IUserRepository>();
+            userService = new UserService(userRepositoryMock.Object);
+        }
         [Fact]
         public void GetUser_ForExistedUser_ReturnsCorrectUser()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
+            userRepositoryMock.Setup(repository => repository.GetUser(testId)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
 
-            long userId = 1;
-            userRepositoryMock.Setup(repository => repository.GetUser(userId)).Returns(new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false });
-
-            var result = userService.GetUser(userId);
-            var expected = new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false };
+            var result = userService.GetUser(testId);
+            var expected = new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false };
 
             Assert.Equal(expected, result);
         }
@@ -25,13 +32,9 @@ namespace EmployeestWeb.Tests
         [Fact]
         public void GetUser_ForNotExistedUser_ReturnsNull()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
+            userRepositoryMock.Setup(repository => repository.GetUser(testId)).Throws(new InvalidOperationException());
 
-            long userId = 1;
-            userRepositoryMock.Setup(repository => repository.GetUser(userId)).Throws(new InvalidOperationException());
-
-            var result = userService.GetUser(1);
+            var result = userService.GetUser(testId);
             
             Assert.Null(result);
         }
@@ -39,68 +42,47 @@ namespace EmployeestWeb.Tests
         [Fact]
         public void AuthorizeUser_ForCorrectUserData_ReturnsCorrectUserId()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
+            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
 
-            string userEmail = "belya@gmail.com";
-            string password = "password";
-            userRepositoryMock.Setup(repository => repository.GetUser(userEmail)).Returns(new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false });
-
-            var result = userService.AuthorizeUser(userEmail, password);
-            var expected = 1;
+            var result = userService.AuthorizeUser(testEmail, testPassword);
+            var expected = testId;
 
             Assert.Equal(expected, result);
         }
         [Fact]
         public void AuthorizeUser_ForInCorrectUserPassword_ReturnsNull()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
+            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
 
-            string userEmail = "belya@gmail.com";
-            string password = "notPassword";
-            userRepositoryMock.Setup(repository => repository.GetUser(userEmail)).Returns(new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false });
-
-            var result = userService.AuthorizeUser(userEmail, password);
+            var result = userService.AuthorizeUser(testEmail, "incorrectPassword");
 
             Assert.Null(result);
         }
         [Fact]
         public void AuthorizeUser_ForInCorrectUserEmail_ReturnsNull()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
+            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Throws(new InvalidOperationException());
 
-            string userEmail = "polivka@gmail.com";
-            string password = "password";
-            userRepositoryMock.Setup(repository => repository.GetUser(userEmail)).Throws(new InvalidOperationException());
-
-            var result = userService.AuthorizeUser(userEmail, password);
+            var result = userService.AuthorizeUser(testEmail, testPassword);
 
             Assert.Null(result);
         }
         [Fact]
         public void RegisterUser_ForCorrectUser_ReturnsCorrectUserId()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
-
-            User user = new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false };
+            User user = new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false };
             userRepositoryMock.Setup(repository => repository.GetUser(user.Email)).Throws(new InvalidOperationException());
 
             var result = userService.RegisterUser(user);
-            var expected = 1;
+            var expected = testId;
 
             Assert.Equal(expected, result);
         }
         [Fact]
         public void RegisterUser_ForExistedUser_ReturnsNull()
         {
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var userService = new UserService(userRepositoryMock.Object);
-
-            User user = new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false };
-            userRepositoryMock.Setup(repository => repository.GetUser(user.Email)).Returns(new User { Id = 1, Email = "belya@gmail.com", FullName = "Viktoriia Belia", Password = "password", PhoneNumber = "380963858681", IsBusinessOwner = false });
+            User user = new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false };
+            userRepositoryMock.Setup(repository => repository.GetUser(user.Email)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
 
             var result = userService.RegisterUser(user);
 
