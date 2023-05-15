@@ -3,6 +3,7 @@
     using EmployeestWeb.DAL.Data;
     using EmployeestWeb.DAL.Interfaces;
     using EmployeestWeb.DAL.Models;
+    using Serilog;
 
     public class TeamRepository : ITeamRepository
     {
@@ -19,6 +20,7 @@
             {
                 await this.db.TeamMembers.AddAsync(teamMember);
                 await this.db.SaveChangesAsync();
+                Log.Information("Employee added");
             }
         }
 
@@ -28,6 +30,7 @@
             {
                 this.db.TeamMembers.Remove(teamMember);
                 await this.db.SaveChangesAsync();
+                Log.Information("Employee removed");
             }
         }
     }
