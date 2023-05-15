@@ -48,6 +48,13 @@ public class UserService : IUserService
 
     public User? GetUser(long id)
     {
-        return this.userRepository.GetUser(id);
+        try
+        {
+            return this.userRepository.GetUser(id);
+        }
+        catch (InvalidOperationException)
+        {
+            return null;
+        }
     }
 }
