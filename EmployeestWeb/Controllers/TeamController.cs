@@ -41,7 +41,7 @@
                     return this.View(model);
                 }
 
-                return this.RedirectToAction("Home", "Home"); // TODO: Change route
+                return this.RedirectToAction("Home", "Home");
             }
 
             return this.View(model);

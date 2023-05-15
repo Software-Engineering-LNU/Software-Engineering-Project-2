@@ -3,6 +3,7 @@
     using EmployeestWeb.BLL.Interfaces;
     using EmployeestWeb.DAL.Interfaces;
     using EmployeestWeb.DAL.Models;
+    using Serilog;
 
     public class TeamService : ITeamService
     {
@@ -33,6 +34,7 @@
                 }
                 else
                 {
+                    Log.Error("User with this email not found!");
                     throw new Exception("User with this email not found!");
                 }
             }
@@ -60,6 +62,7 @@
                 }
                 else
                 {
+                    Log.Error("User with this email not found!");
                     throw new Exception("User with this email not found!");
                 }
             }
