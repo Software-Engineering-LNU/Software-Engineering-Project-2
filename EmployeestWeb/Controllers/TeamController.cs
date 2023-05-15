@@ -14,11 +14,11 @@
         }
 
         [HttpGet]
-        public IActionResult AddEmployee()
+        public IActionResult AddEmployee(int teamId)
         {
             var model = new AddEmployeeTeamViewModel
             {
-                TeamId = 1,
+                TeamId = teamId,
             };
 
             return this.View(model);
@@ -39,7 +39,7 @@
                 }
             }
 
-            return this.RedirectToAction("Home", "Home"); // TODO: Change route
+            return this.RedirectToAction("Home", "Home");
         }
     }
 }
