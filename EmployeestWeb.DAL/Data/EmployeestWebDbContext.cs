@@ -30,9 +30,9 @@ namespace EmployeestWeb.DAL.Data
 
         public virtual DbSet<Team>? Teams { get; set; }
 
-        public virtual DbSet<TeamMember>? TeamMembers { get; set; }
+        public virtual DbSet<TeamMember> TeamMembers { get; set; } = null!;
 
-        public virtual DbSet<User>? Users { get; set; }
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

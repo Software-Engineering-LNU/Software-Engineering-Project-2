@@ -1,0 +1,16 @@
+﻿@model AddEmployeeTeamViewModel
+
+<link href="@Url.Content("~/wwwroot/css/site.css")" rel="stylesheet" type="text/css" />
+<div class="add-employee-form">
+    @Html.ValidationSummary()
+
+<form asp-action="AddEmployee" asp-controller="Team" method="post">
+    <div class="form-group">
+        <label asp-for="Email" class="add-employee-label"></label>
+        <input asp-for="Email" class="add-employee-input" />
+        <span asp-validation-for="Email" class="add-employee-validation-error"></span>
+    </div>
+        <input asp-for="TeamId" class="add-employee-input" hidden="hidden" value="@Model?.TeamId"/>
+    <button type="submit" class="add-employee-btn">Add Employee</button>
+</form>
+    </div>
