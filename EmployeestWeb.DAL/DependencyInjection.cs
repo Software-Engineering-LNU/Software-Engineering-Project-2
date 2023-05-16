@@ -1,16 +1,19 @@
-namespace EmployeestWeb.DAL;
-
-using Interfaces;
-using Repositories;
-using Microsoft.Extensions.DependencyInjection;
-
-public static class DependencyInjection
+namespace EmployeestWeb.DAL
 {
-    public static void AddDAL(this IServiceCollection services)
+    using EmployeestWeb.DAL.Interfaces;
+    using EmployeestWeb.DAL.Repositories;
+    using Microsoft.Extensions.DependencyInjection;
+
+    public static class DependencyInjection
     {
-        // Register services
-        services.AddScoped<IProjectRepository, ProjectRepository>();
-        services.AddScoped<ITaskRepository, TaskRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        public static void AddDAL(this IServiceCollection services)
+        {
+            // Register services
+            services.AddTransient<IWorkerRepository, WorkerRepository>();
+            services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+        }
     }
 }

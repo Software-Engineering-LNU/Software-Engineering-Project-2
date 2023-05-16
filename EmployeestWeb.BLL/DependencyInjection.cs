@@ -1,16 +1,19 @@
-namespace EmployeestWeb.BLL;
-
-using Interfaces;
-using Services;
-using Microsoft.Extensions.DependencyInjection;
-
-public static class DependencyInjection
+namespace EmployeestWeb.BLL
 {
-    public static void AddBLL(this IServiceCollection services)
+    using EmployeestWeb.BLL.Interfaces;
+    using EmployeestWeb.BLL.Services;
+    using Microsoft.Extensions.DependencyInjection;
+
+    public static class DependencyInjection
     {
-        services.AddScoped<IProjectService, ProjectService>();
-        services.AddScoped<ITaskService, TaskService>();
-        services.AddScoped<IUserService, UserService>();
-        services.AddHttpContextAccessor();
+        public static void AddBLL(this IServiceCollection services)
+        {
+            // Register services
+            services.AddTransient<ITeamService, TeamService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddHttpContextAccessor();
+        }
     }
 }
