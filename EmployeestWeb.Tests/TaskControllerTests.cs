@@ -1,6 +1,7 @@
 ﻿using EmployeestWeb.BLL.Interfaces;
 using EmployeestWeb.Controllers;
 using EmployeestWeb.DAL.Models;
+using EmployeestWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -21,17 +22,19 @@ namespace EmployeestWeb.Tests
         [Fact]
         public void AddTask_RedirectToActionResult()
         {
-            var test = new ModelTask();
-            test.Id = 1111;
-            test.Name = "Test task";
-            test.UserId = 1;
-            test.TeamId = 1;
-            test.TeamId = 1;
+            var task = new ModelTask();
+            var model = new AddTaskViewModel();
+            task.Id = model.Id = 1111;
+            task.Name = model.Name = "Test task";
+            task.Description = model.Description = "Test description";
+            task.UserId = model.UserId = 1;
+            task.TeamId = model.TeamId = 1;
+            task.Status = model.Status = "New";
 
-            _taskServiceMock.Setup(serv => serv.CreateTask(test));
+            _taskServiceMock.Setup(serv => serv.CreateTask(task));
             _taskController = new TaskController(_taskServiceMock.Object);
 
-            RedirectToActionResult result = (RedirectToActionResult)_taskController.Create(test);
+            RedirectToActionResult result = (RedirectToActionResult)_taskController.Create(model);
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<IActionResult>(result);
@@ -54,24 +57,4 @@ namespace EmployeestWeb.Tests
             Assert.IsType<NotFoundResult>(result);
         }
     }
-
-    /*
-     [Fact]
-    public async Task Index_ReturnsAViewResult_WithoutRedirect()
-    {
-        var user = new ClaimsPrincipal();
-        _homeController = new HomeController(_loggerMock.Object, _userServiceMock.Object);
-        _homeController.ControllerContext = new ControllerContext()
-        {
-            HttpContext = new DefaultHttpContext() { User = user }
-        };
-
-        ViewResult result = (ViewResult)_homeController.Index();
-
-        Assert.NotNull(result);
-        Assert.IsAssignableFrom<IActionResult>(result);
-        Assert.IsType<ViewResult>(result);
-        Assert.True(string.IsNullOrEmpty(result.ViewName));
-    }
-     */
 }

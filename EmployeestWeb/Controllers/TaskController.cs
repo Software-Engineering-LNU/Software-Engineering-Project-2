@@ -2,6 +2,7 @@
 
 using BLL.Interfaces;
 using DAL.Models;
+using EmployeestWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -35,13 +36,26 @@ public class TaskController : Controller
 
     public ActionResult Create()
     {
-        return this.View();
+        var model = new AddTaskViewModel();
+
+        return this.View(model);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(Task task)
+    public ActionResult Create(AddTaskViewModel model)
     {
+        var task = new Task
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Status = model.Status,
+            StoryPoints = model.StoryPoints,
+            UserId = model.UserId,
+            TeamId = model.TeamId,
+        };
+
         if (this.ModelState.IsValid)
         {
             this.taskService.CreateTask(task);
@@ -49,7 +63,7 @@ public class TaskController : Controller
         }
 
         Log.Information("Task with specified Id created: " + Convert.ToString(task.Id));
-        return this.View(task);
+        return this.View(model);
     }
 
     public ActionResult Edit(long id)
