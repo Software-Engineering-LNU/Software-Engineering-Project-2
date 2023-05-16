@@ -4,6 +4,7 @@ using Interfaces;
 using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 public class UserService : IUserService
 {
@@ -18,6 +19,9 @@ public class UserService : IUserService
     {
         try
         {
+            var passwordHasher = new PasswordHasher<User>();
+            user.Password = passwordHasher.HashPassword(user, user.Password);
+
             this.userRepository.GetUser(user.Email);
             return null;
         }
@@ -33,7 +37,16 @@ public class UserService : IUserService
         try
         {
             User? user = this.userRepository.GetUser(email);
-            if (user != null && user.Password.Equals(password))
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.Password, password);
+
+            if (result == PasswordVerificationResult.Success)
             {
                 return user.Id;
             }
@@ -48,6 +61,13 @@ public class UserService : IUserService
 
     public User? GetUser(long id)
     {
-        return this.userRepository.GetUser(id);
+        try
+        {
+            return this.userRepository.GetUser(id);
+        }
+        catch (InvalidOperationException)
+        {
+            return null;
+        }
     }
 }
