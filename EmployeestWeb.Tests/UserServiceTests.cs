@@ -1,6 +1,7 @@
 ﻿using EmployeestWeb.BLL.Services;
 using EmployeestWeb.DAL.Interfaces;
 using EmployeestWeb.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 
 namespace EmployeestWeb.Tests
@@ -26,7 +27,7 @@ namespace EmployeestWeb.Tests
             var result = userService.GetUser(testId);
             var expected = new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false };
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected.Id, result.Id);
         }
 
         [Fact]
@@ -42,12 +43,15 @@ namespace EmployeestWeb.Tests
         [Fact]
         public void AuthorizeUser_ForCorrectUserData_ReturnsCorrectUserId()
         {
-            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
+            var passwordHasher = new PasswordHasher<User>();
+            string hashedPassword = passwordHasher.HashPassword(null, testPassword);
+
+            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = hashedPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
 
             var result = userService.AuthorizeUser(testEmail, testPassword);
             var expected = testId;
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result.Id);
         }
         [Fact]
         public void AuthorizeUser_ForInCorrectUserPassword_ReturnsNull()
@@ -76,7 +80,7 @@ namespace EmployeestWeb.Tests
             var result = userService.RegisterUser(user);
             var expected = testId;
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result.Id);
         }
         [Fact]
         public void RegisterUser_ForExistedUser_ReturnsNull()

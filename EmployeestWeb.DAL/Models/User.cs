@@ -32,22 +32,5 @@
         public virtual ICollection<Task> Tasks { get; set; }
 
         public virtual ICollection<TeamMember> TeamMembers { get; set; }
-
-        public override bool Equals(object? obj)
-        {
-            var item = obj as User;
-
-            if (item == null)
-            {
-                return false;
-            }
-
-            return this.Id.Equals(item.Id);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
     }
 }

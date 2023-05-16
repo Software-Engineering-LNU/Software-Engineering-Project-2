@@ -49,7 +49,7 @@ public class UserRepository : IUserRepository
             .Include(u => u.ProjectMembers)
             .ThenInclude(p => p.Project)
             .ThenInclude(p => p.Owner)
-            .Single(user => email == user.Email);
+            .Single(user => user.Email.Equals(email));
     }
 
     public bool Exist(string email)

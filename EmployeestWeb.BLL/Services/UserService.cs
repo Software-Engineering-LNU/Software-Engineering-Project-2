@@ -38,9 +38,9 @@ public class UserService : IUserService
 
     public User? AuthorizeUser(string email, string password)
     {
+        Log.Information("UserService AuthorizedUser {@email} {@password}", email, password);
         try
         {
-            Log.Information("UserService AuthorizedUser {@email} {@password}", email, password);
             User? user = this.userRepository.GetUser(email);
 
             if (user == null)
@@ -56,11 +56,12 @@ public class UserService : IUserService
                 return user;
             }
 
+            Log.Error("UserService AuthorizedUser {@email} {@password} InvalidPassword", email, password);
             return null;
         }
         catch (InvalidOperationException)
         {
-            Log.Information("UserService AuthorizedUser {@email} {@password} InvalidOperationException", email, password);
+            Log.Error("UserService AuthorizedUser {@email} {@password} InvalidOperationException", email, password);
             return null;
         }
     }

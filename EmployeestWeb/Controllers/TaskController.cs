@@ -47,7 +47,6 @@ public class TaskController : Controller
     [ValidateAntiForgeryToken]
     public ActionResult Create(AddTaskViewModel model)
     {
-        Log.Information("TasksController Create {@task}", task);
         var task = new Task
         {
             Id = model.Id,
@@ -58,6 +57,7 @@ public class TaskController : Controller
             UserId = model.UserId,
             TeamId = model.TeamId,
         };
+        Log.Information("TasksController Create {@task}", task);
 
         if (this.ModelState.IsValid)
         {
