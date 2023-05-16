@@ -6,6 +6,7 @@ using DAL.Models;
 using System;
 using Serilog;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 public class UserService : IUserService
 {
@@ -19,15 +20,19 @@ public class UserService : IUserService
     public User? RegisterUser(User user)
     {
         Log.Information("UserService RegisterUser {@user}", user);
-        if (!this.userRepository.Exist(user.Email))
+        try
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            user.Password = passwordHasher.HashPassword(user, user.Password);
+
+            this.userRepository.GetUser(user.Email);
+            Log.Error("UserService RegisterUser User {@user} already exist", user);
+            return null;
+        }
+        catch (InvalidOperationException)
         {
             this.userRepository.AddUser(user);
             return user;
-        }
-        else
-        {
-            Log.Error("UserService RegisterUser User {@user} already exist", user);
-            return null;
         }
     }
 
@@ -37,7 +42,16 @@ public class UserService : IUserService
         {
             Log.Information("UserService AuthorizedUser {@email} {@password}", email, password);
             User? user = this.userRepository.GetUser(email);
-            if (user != null && user.Password.Equals(password))
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.Password, password);
+
+            if (result == PasswordVerificationResult.Success)
             {
                 return user;
             }
