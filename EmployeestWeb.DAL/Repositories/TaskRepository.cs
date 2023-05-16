@@ -17,6 +17,7 @@ public class TaskRepository : ITaskRepository
 
     public IEnumerable<Task> GetAllTasks()
     {
+        Log.Information("TaskRepository GetAllTasks");
         return this.context.Tasks?
             .Include(task => task.User)
             .Include(task => task.Team).ThenInclude(t => t.Tasks)
@@ -25,6 +26,7 @@ public class TaskRepository : ITaskRepository
 
     public Task? GetTaskById(long id)
     {
+        Log.Information("TaskRepository GetTaskById {@id}", id);
         var toReturn = this.context.Tasks?
             .Include(task => task.User)
             .Include(task => task.Team).ThenInclude(t => t.Tasks)
@@ -40,6 +42,7 @@ public class TaskRepository : ITaskRepository
 
     public void CreateTask(Task task)
     {
+        Log.Information("TaskRepository CreateTask {@task}", task);
         task.User = this.context.Users!.Find(task.UserId);
         task.Team = this.context.Teams!.Find(task.TeamId) !;
         this.context.Tasks!.Add(task);
@@ -48,12 +51,14 @@ public class TaskRepository : ITaskRepository
 
     public void UpdateTask(Task task)
     {
+        Log.Information("TaskRepository UpdateTask {@task}", task);
         this.context.Tasks!.Update(task);
         this.context.SaveChanges();
     }
 
     public void DeleteTask(Task task)
     {
+        Log.Information("TaskRepository DeleteTask {@task}", task);
         this.context.Tasks?.Remove(task);
         this.context.SaveChanges();
     }

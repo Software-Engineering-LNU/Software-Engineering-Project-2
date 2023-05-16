@@ -1,7 +1,9 @@
-﻿@{
+﻿@using EmployeestWeb.Models
+@model EmployeestWeb.Models.EmployeeViewModel
+@{
     ViewData["Title"] = "Dashboard";
+    ViewData["UserName"] = Model.FullName;
 }
-@model EmployeestWeb.DAL.Models.User
 
 @section scripts
 {
@@ -41,57 +43,78 @@
                 <div class="content-block my-projects">
                     <div class="block-heading">
                         <h2 class="heading project-heading">My projects</h2>
-                        <div class="counter project-counter">1</div>
+                        @{
+                            int projectsSize = 0;
+                            if (Model.Projects != null)
+                            {
+                                projectsSize = Model.Projects.Count();
+                            }
+                            <div class="counter project-counter">@projectsSize</div>
+                        }
                     </div>
                     <div class="project">
-                        <img
-                            class="project-avatar"
-                            src="~/assets/project-avatar.svg"
-                            alt="Icon for project">
-                        <div class="project-content">
-                            <div class="project-name-wrapper">
-                                <div class="project-name">Employeest project</div>
-                                <div class="teams-label">5 teams</div>
-                            </div>
-                            <a class="more-info">View more information</a>
-                        </div>
+                        @{
+                            if (Model.Projects != null) 
+                            {
+                                int i = 0;
+                                foreach (var project in Model.Projects) 
+                                {
+                                    if (i < 2) {
+                                        <img class="project-avatar"
+                                        src="~/assets/project-avatar.svg"
+                                        alt="Icon for project">
+                                        <div class="project-content">
+                                            <div class="project-name-wrapper">
+                                                <div class="project-name">@project.Name</div>
+                                            </div>
+                                            <div><a class="more-info">View more information</a></div>
+                                        </div>
+                                        ++i;
+                                    }
+                                }
+                            }
+                        }
                     </div>
                 </div>
                 <div class="content-block my-team">
                     <div class="block-heading">
-                        <h2 class="heading project-heading">My team</h2>
-                        <div class="counter project-counter">5</div>
+                        <h2 class="heading project-heading">My teams</h2>
+                        @{
+                            int teamsSize = 0;
+                            if (Model.Teams != null)
+                            {
+                                teamsSize = Model.Teams.Count();
+                            }
+                            <div class="counter project-counter">@teamsSize</div>
+                        }
                     </div>
                     <div class="team-list-wrapper">
                         <div class="team-list">
                             <div class="member-body">
-                                <img
-                                    class="member-avatar"
-                                    src="~/assets/team-member-avatar.svg"
-                                    alt="">
-                                <div class="member-content">
-                                    <div class="name-wrapper">
-                                        <div class="member-name">Full name</div>
-                                        <div class="position">Position</div>
-                                    </div>
-                                    <a class="view-profile-link">View profile</a>
-                                </div>
-                            </div>
-                            <div class="member-body">
-                                <img
-                                    class="member-avatar"
-                                    src="~/assets/team-member-avatar.svg"
-                                    alt="">
-                                <div class="member-content">
-                                    <div class="name-wrapper">
-                                        <div class="member-name">Full name</div>
-                                        <div class="position">Position</div>
-                                    </div>
-                                    <a class="view-profile-link">View profile</a>
-                                </div>
+                                @{
+                                    if (Model.Teams != null)
+                                    {
+                                        int i = 0;
+                                        foreach (var team in Model.Teams)
+                                        {
+                                            if (i < 2)
+                                            {
+                                                <img class="member-avatar"
+                                                src="~/assets/team-member-avatar.svg"
+                                                alt="">
+                                                <div class="member-content">
+                                                    <div class="name-wrapper">
+                                                        <div class="member-name">@team.Name</div>
+                                                    </div>
+                                                    <div><a class="more-info">View more information</a></div>
+                                                </div>
+                                                ++i;
+                                            }
+                                        }
+                                    }
+                                }
                             </div>
                         </div>
-                        <a class="watch-more">Watch more</a>
                     </div>
                 </div>
             </div>
@@ -112,28 +135,27 @@
             <div class="tasks-heading-wrapper">
                 <h2 class="tasks-heading">My tasks</h2>
             </div>
-            
-            @{
-                var tasks = Model.Tasks.OrderBy(task => task.Name);
-            }
             <div class="task-list">
-                @foreach (var task in tasks)
+                @if (Model.Tasks != null)
                 {
-                    <div class="task">
-                        <div class="task-name-wrapper">
-                            <input type="checkbox" name="task-checkbox" id="task-checkbox" value="false" data-task-id="@task.Id" onclick="updateTaskStatus(this);" />
-                            <div class="task-name" id="task-name-@task.Id">@task.Name</div>
+                    foreach (var task in Model.Tasks)
+                    {
+                        <div class="task">
+                            <div class="task-name-wrapper">
+                                <input type="checkbox" name="task-checkbox" id="task-checkbox" value="false" data-task-id="@task.Id" onclick="updateTaskStatus(this);" />
+                                <div class="task-name"  id="task-name-@task.Id">@task.Name</div>
+                            </div>
+                            <div class="functionality-wrapper">
+                                <a asp-area="" asp-controller="Task" asp-route-id="@task.Id" asp-action="Details">
+                                    <button class="options-button">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </button>
+                                </a>
+                            </div>
                         </div>
-                        <div class="functionality-wrapper">
-                            <a asp-area="" asp-controller="Task" asp-route-id="@task.Id" asp-action="Details">
-                                <button class="options-button">
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
+                    }
                 }
 
                 <div class="create-task">

@@ -61,8 +61,8 @@ public static class Program
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
-                name: "authorization",
-                pattern: "{controller=Authorization}/{action=SignIn}/{id?}");
+                name: "Home",
+                pattern: "{controller=Home}/{action=Home}");
         });
         try
         {

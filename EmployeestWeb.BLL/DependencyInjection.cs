@@ -11,6 +11,9 @@ public static class DependencyInjection
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<ITaskService, TaskService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddScoped<IOwnerService, OwnerService>();
+
         services.AddHttpContextAccessor();
     }
 }

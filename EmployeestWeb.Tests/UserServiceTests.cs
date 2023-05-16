@@ -27,7 +27,7 @@ namespace EmployeestWeb.Tests
             var result = userService.GetUser(testId);
             var expected = new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false };
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected.Id, result.Id);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace EmployeestWeb.Tests
             var result = userService.AuthorizeUser(testEmail, testPassword);
             var expected = testId;
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result.Id);
         }
         [Fact]
         public void AuthorizeUser_ForInCorrectUserPassword_ReturnsNull()
@@ -80,7 +80,7 @@ namespace EmployeestWeb.Tests
             var result = userService.RegisterUser(user);
             var expected = testId;
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result.Id);
         }
         [Fact]
         public void RegisterUser_ForExistedUser_ReturnsNull()

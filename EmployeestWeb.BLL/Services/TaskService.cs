@@ -5,6 +5,7 @@ using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+using Serilog;
 
 public class TaskService : ITaskService
 {
@@ -21,11 +22,13 @@ public class TaskService : ITaskService
 
     public IEnumerable<Task> GetAllTasks()
     {
+        Log.Information("TaskService GetAllTasks");
         return this.taskRepository.GetAllTasks();
     }
 
     public Task GetTaskById(long id)
     {
+        Log.Information("TaskService  GetTaskById {@id}", id);
         var task = this.taskRepository.GetTaskById(id);
 
         if (task == null)
@@ -38,6 +41,7 @@ public class TaskService : ITaskService
 
     public IEnumerable<Task> GetTasksByUserId(long userId)
     {
+        Log.Information("TaskService  GetTasksByUserId {@userId}", userId);
         IEnumerable<Task>? tasks = this.userRepository.GetUser(userId)?.Tasks;
 
         if (tasks == null)
@@ -50,6 +54,7 @@ public class TaskService : ITaskService
 
     public void CreateTask(Task task)
     {
+        Log.Information("TaskService  CreateTask {@task}", task);
         if (task == null)
         {
             var errorMessage = $"Task cannot be null.";
@@ -61,6 +66,7 @@ public class TaskService : ITaskService
 
     public void UpdateTask(long id, Task task)
     {
+        Log.Information("TaskService  UpdateTask {@id} {@task}", id, task);
         var existingTask = this.taskRepository.GetTaskById(id);
 
         if (existingTask == null)
@@ -89,6 +95,7 @@ public class TaskService : ITaskService
 
     public void DeleteTask(long id)
     {
+        Log.Information("TaskService DeleteTask {@id}", id);
         var taskToDelete = this.taskRepository.GetTaskById(id);
 
         if (taskToDelete == null)

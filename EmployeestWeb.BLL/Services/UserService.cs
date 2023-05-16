@@ -4,6 +4,8 @@ using Interfaces;
 using EmployeestWeb.DAL.Interfaces;
 using DAL.Models;
 using System;
+using Serilog;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
 public class UserService : IUserService
@@ -15,25 +17,28 @@ public class UserService : IUserService
         this.userRepository = userRepository;
     }
 
-    public long? RegisterUser(User user)
+    public User? RegisterUser(User user)
     {
+        Log.Information("UserService RegisterUser {@user}", user);
         try
         {
             var passwordHasher = new PasswordHasher<User>();
             user.Password = passwordHasher.HashPassword(user, user.Password);
 
             this.userRepository.GetUser(user.Email);
+            Log.Error("UserService RegisterUser User {@user} already exist", user);
             return null;
         }
         catch (InvalidOperationException)
         {
             this.userRepository.AddUser(user);
-            return user.Id;
+            return user;
         }
     }
 
-    public long? AuthorizeUser(string email, string password)
+    public User? AuthorizeUser(string email, string password)
     {
+        Log.Information("UserService AuthorizedUser {@email} {@password}", email, password);
         try
         {
             User? user = this.userRepository.GetUser(email);
@@ -48,13 +53,15 @@ public class UserService : IUserService
 
             if (result == PasswordVerificationResult.Success)
             {
-                return user.Id;
+                return user;
             }
 
+            Log.Error("UserService AuthorizedUser {@email} {@password} InvalidPassword", email, password);
             return null;
         }
         catch (InvalidOperationException)
         {
+            Log.Error("UserService AuthorizedUser {@email} {@password} InvalidOperationException", email, password);
             return null;
         }
     }
