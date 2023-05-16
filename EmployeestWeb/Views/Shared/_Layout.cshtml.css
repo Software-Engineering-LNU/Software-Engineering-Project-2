@@ -47,21 +47,26 @@ button.accept-policy {
   line-height: 60px;
 }
 
-.sidebar {
-  background-color: #D9D9D9;
-  position: absolute;
-  width: 120px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+@media (max-width: 849px) {
+    .sidebar {
+        background-color: #D9D9D9;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 60px;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 30px;
+    }
+
+    .nothing-box {
+        width: 0;
+    }
 }
 
 .mini-logo {
   width: 45px;
-  margin-top: 60px;
   background-color: transparent;
   border: none;
   padding: 0;
@@ -75,14 +80,8 @@ button.accept-policy {
   height: 45px;
 }
 
-.nothing-box {
-  width: 64px;
-  height: 64px;
-}
-
 .aside-navbar {
   display: flex;
-  flex-direction: column;
   gap: 27px;
 }
 
@@ -95,19 +94,11 @@ button.accept-policy {
   width: 38px;
 }
 
-.aside-navbar-wrapper {
-  background-color: #B5B5B5;
-  padding: 50px 8px;
-}
-
 .user-block {
-  position: absolute;
-  right: 52px;
-  top: 60px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 60px;
-  z-index: 1;
 }
 
 .user-info {
@@ -147,4 +138,50 @@ button.accept-policy {
 .user-position {
   font-size: 14px;
   font-weight: 200;
+}
+
+@media (min-width: 850px) {
+    .nothing-box {
+        display: block;
+        width: 64px;
+        height: 64px;
+    }
+
+    .sidebar {
+        background-color: #D9D9D9;
+        position: absolute;
+        width: 120px;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 300px
+    }
+
+    .aside-navbar {
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+    }
+
+    .aside-navbar-wrapper {
+        background-color: #B5B5B5;
+        padding: 50px 8px;
+    }
+
+    .user-block {
+        position: absolute;
+        right: 52px;
+        top: 60px;
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        z-index: 1;
+    }
+
+    .mini-logo {
+        padding-top: 60px;
+    }
+
 }
