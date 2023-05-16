@@ -1,6 +1,7 @@
 ﻿using EmployeestWeb.BLL.Services;
 using EmployeestWeb.DAL.Interfaces;
 using EmployeestWeb.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 
 namespace EmployeestWeb.Tests
@@ -42,7 +43,10 @@ namespace EmployeestWeb.Tests
         [Fact]
         public void AuthorizeUser_ForCorrectUserData_ReturnsCorrectUserId()
         {
-            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = testPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
+            var passwordHasher = new PasswordHasher<User>();
+            string hashedPassword = passwordHasher.HashPassword(null, testPassword);
+
+            userRepositoryMock.Setup(repository => repository.GetUser(testEmail)).Returns(new User { Id = testId, Email = testEmail, FullName = "Test Name", Password = hashedPassword, PhoneNumber = "380990009900", IsBusinessOwner = false });
 
             var result = userService.AuthorizeUser(testEmail, testPassword);
             var expected = testId;
