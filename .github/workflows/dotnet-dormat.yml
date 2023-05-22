@@ -1,0 +1,36 @@
+name: dotnet-format
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  dotnet-format:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dotnet tools
+        uses: xt0rted/dotnet-tool-restore@v1
+
+      - name: Install dotnet-format
+        run: dotnet tool install -g dotnet-format --version 3.3.111304
+
+      - name: Run dotnet format
+        id: format
+        run: dotnet-format -v detailed
+
+      - name: Commit files and push
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -a -m '${{ github.event.head_commit.message }} [auto-format]'
+          git push

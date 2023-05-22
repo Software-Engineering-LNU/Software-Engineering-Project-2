@@ -1,0 +1,77 @@
+﻿@using EmployeestWeb.Models
+@model EmployeestWeb.Models.OwnerViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    ViewData["UserName"] = Model.FullName;
+}
+
+<div class="dashboard">
+    <div class="main-block">
+        <header class="header">
+            <h3>Home</h3>
+            <h1>Welcome, @Model.FullName</h1>
+        </header>
+        <div class="statistics-wrapper"></div>
+    </div>
+    <aside class="aside-block">
+        <div class="project-block">
+            <div class="heading-wrapper">
+                <h2 class="heading">My projects</h2>
+                <div class="counter">
+                    @{
+                        int projectsSize = 0;
+                        int teamsSize = 0;
+                        if (Model.Projects != null)
+                        {
+                            projectsSize = Model.Projects.Count();
+                        }
+                        <div class="counter project-counter">@projectsSize</div>
+                    }
+                </div>
+            </div>
+            <div class="project-list">
+                @{
+                    if (Model.Projects != null)
+                    {
+                        foreach (var project in Model.Projects)
+                        {
+                            <div class="project">
+                                <div class="project-info">
+                                    <img class="project-avatar"
+                                            src="~/assets/project-icon.svg"
+                                            alt="Project placeholder">
+                                    <div class="project-wrapper">
+                                        <div class="project-name-wrapper">
+                                            <div class="project-name">@project.Name</div>
+                                            @{
+                                                teamsSize = 0;
+                                                if (project.Teams != null)
+                                                {
+                                                    teamsSize = project.Teams.Count();
+                                                }
+                                                <div class="teams">@teamsSize teams</div>
+                                            }
+                                        </div>
+                                        <a class="view-more">View more information</a>
+                                    </div>
+                                </div>
+                                <div class="actions">
+                                    <button class="team-button">
+                                        <img class="team-icon" 
+                                                src="~/assets/team-icon.svg" 
+                                                alt="Team icon">
+                                    </button>
+                                    <button class="options-button">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </aside>
+</div>

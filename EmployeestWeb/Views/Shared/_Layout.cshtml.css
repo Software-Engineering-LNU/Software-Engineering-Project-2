@@ -1,0 +1,187 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a {
+  color: #0077cc;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+@media (max-width: 849px) {
+    .sidebar {
+        background-color: #D9D9D9;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 60px;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 30px;
+    }
+
+    .nothing-box {
+        width: 0;
+    }
+}
+
+.mini-logo {
+  width: 45px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini-logo-icon img{
+  width: 45px;
+  height: 45px;
+}
+
+.aside-navbar {
+  display: flex;
+  gap: 27px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+}
+
+.nav-button-icon {
+  width: 38px;
+}
+
+.user-block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 60px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.user-avatar-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: none;
+}
+
+.options-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.user-name {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.user-position {
+  font-size: 14px;
+  font-weight: 200;
+}
+
+@media (min-width: 850px) {
+    .nothing-box {
+        display: block;
+        width: 64px;
+        height: 64px;
+    }
+
+    .sidebar {
+        background-color: #D9D9D9;
+        position: absolute;
+        width: 120px;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 300px
+    }
+
+    .aside-navbar {
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+    }
+
+    .aside-navbar-wrapper {
+        background-color: #B5B5B5;
+        padding: 50px 8px;
+    }
+
+    .user-block {
+        position: absolute;
+        right: 52px;
+        top: 60px;
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        z-index: 1;
+    }
+
+    .mini-logo {
+        padding-top: 60px;
+    }
+
+}
