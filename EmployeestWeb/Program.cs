@@ -3,6 +3,7 @@ namespace EmployeestWeb;
 using EmployeestWeb.BLL;
 using EmployeestWeb.DAL;
 using EmployeestWeb.DAL.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Configuration;
 using Serilog;
@@ -11,6 +12,14 @@ public static class Program
 {
     public static void Main(string[] args)
     {
+        Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((hostingContext, config) =>
+        {
+            var env = hostingContext.HostingEnvironment;
+            config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                  .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+        });
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Add logger
